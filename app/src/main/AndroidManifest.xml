@@ -17,6 +17,12 @@
             android:exported="false" />
         <activity
             android:name=".Cadastro"
+            android:exported="false" />
+        <activity
+            android:name=".MenuComunActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MenuAdministradorActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -13,9 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText CampoEmail;
     private EditText CampoSenha;
-    private Button btLogina;
-    private TextView EsqueceuSenhaLink;
-    private TextView CadastroLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
         // Inicializar os componentes da interface
         CampoEmail = findViewById(R.id.campoEmail);
         CampoSenha = findViewById(R.id.campoSenha);
-        btLogina = findViewById(R.id.btLogin);
-        EsqueceuSenhaLink = findViewById(R.id.EsqueceuSenhaLink);
-        CadastroLink = findViewById(R.id.CadastroLink);
+        Button btLogin = findViewById(R.id.btLogin);
+        TextView esqueceuSenhaLink = findViewById(R.id.EsqueceuSenhaLink);
+        TextView cadastroLink = findViewById(R.id.CadastroLink);
 
         // Configurar ação do botão de login
-        btLogina.setOnClickListener(new View.OnClickListener() {
+        btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = CampoEmail.getText().toString().trim();
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Configurar links de esquecimento de senha e registro
-        EsqueceuSenhaLink.setOnClickListener(new View.OnClickListener() {
+        esqueceuSenhaLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Ação para Esqueceu sua senha
@@ -54,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        CadastroLink.setOnClickListener(new View.OnClickListener() {
+        cadastroLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Ação para Registrar

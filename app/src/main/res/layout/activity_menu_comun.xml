@@ -1,0 +1,145 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#EFEFEF"
+    android:gravity="center_horizontal">
+
+    <!-- Título e Logo do Usuário -->
+    <ImageView
+        android:id="@+id/logoImage2"
+        android:layout_width="357dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/your_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USUÁRIO COMUM"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:drawablePadding="8dp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Botão Cadastro de Produtos -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:onClick="openCadastroProdutos">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_add_product_icon"
+            android:contentDescription="Cadastro de Produtos"/>
+
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="Cadastro de Produtos"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Botão Cadastro de Fornecedores -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:onClick="openCadastroFornecedores">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_add_supplier_icon"
+            android:contentDescription="Cadastro de Fornecedores"/>
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="Cadastro de Fornecedores"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Botão Contagem -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:onClick="openContagem">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_count_icon"
+            android:contentDescription="Contagem"/>
+
+        <TextView
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="Contagem"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Botão Gerar Relatório -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:onClick="openRelatorio">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_report_icon"
+            android:contentDescription="Gerar Relatório"/>
+
+        <TextView
+            android:layout_width="143dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="Gerar Relatório"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Botão Sair -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="32dp"
+        android:onClick="logout">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_logout_icon"
+            android:contentDescription="Sair"/>
+
+        <TextView
+            android:layout_width="68dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="Sair"
+            android:textColor="#FF0000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
