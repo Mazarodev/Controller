@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText emailField;
-    private EditText passwordField;
-    private Button loginButton;
-    private TextView forgotPasswordLink;
-    private TextView registerLink;
+    private EditText CampoEmail;
+    private EditText CampoSenha;
+    private Button btLogina;
+    private TextView EsqueceuSenhaLink;
+    private TextView CadastroLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +23,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Inicializar os componentes da interface
-        emailField = findViewById(R.id.emailField);
-        passwordField = findViewById(R.id.passwordField);
-        loginButton = findViewById(R.id.loginButton);
-        forgotPasswordLink = findViewById(R.id.forgotPasswordLink);
-        registerLink = findViewById(R.id.registerLink);
+        CampoEmail = findViewById(R.id.campoEmail);
+        CampoSenha = findViewById(R.id.campoSenha);
+        btLogina = findViewById(R.id.btLogin);
+        EsqueceuSenhaLink = findViewById(R.id.EsqueceuSenhaLink);
+        CadastroLink = findViewById(R.id.CadastroLink);
 
         // Configurar ação do botão de login
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        btLogina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailField.getText().toString().trim();
-                String password = passwordField.getText().toString().trim();
+                String email = CampoEmail.getText().toString().trim();
+                String password = CampoSenha.getText().toString().trim();
 
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Configurar links de esquecimento de senha e registro
-        forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
+        EsqueceuSenhaLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Ação para Esqueceu sua senha
@@ -54,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        registerLink.setOnClickListener(new View.OnClickListener() {
+        CadastroLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Ação para Registrar
-                Toast.makeText(MainActivity.this, "Registrar-se", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, Cadastro.class);
+                startActivity(intent);
             }
         });
     }

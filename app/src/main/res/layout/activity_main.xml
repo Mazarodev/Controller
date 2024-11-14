@@ -35,7 +35,7 @@
 
     <!-- Campo de e-mail -->
     <EditText
-        android:id="@+id/emailField"
+        android:id="@+id/campoEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint=" e-mail"
@@ -46,7 +46,7 @@
 
     <!-- Campo de senha -->
     <EditText
-        android:id="@+id/passwordField"
+        android:id="@+id/campoSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint=" senha"
@@ -57,7 +57,7 @@
 
     <!-- Botão de login -->
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/btLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Entrar"
@@ -81,7 +81,7 @@
         android:layout_marginTop="16dp">
 
         <TextView
-            android:id="@+id/forgotPasswordLink"
+            android:id="@+id/EsqueceuSenhaLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Esqueceu sua senha?"
@@ -90,7 +90,7 @@
             android:paddingEnd="8dp" />
 
         <TextView
-            android:id="@+id/registerLink"
+            android:id="@+id/CadastroLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Não possui conta? Registre-se"
