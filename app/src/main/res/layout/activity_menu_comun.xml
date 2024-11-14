@@ -42,11 +42,12 @@
             android:contentDescription="Cadastro de Produtos"/>
 
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:text="Cadastro de Produtos"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 
     <!-- Botão Cadastro de Fornecedores -->
@@ -69,7 +70,8 @@
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:text="Cadastro de Fornecedores"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 
     <!-- Botão Contagem -->
@@ -88,11 +90,12 @@
             android:contentDescription="Contagem"/>
 
         <TextView
-            android:layout_width="117dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:text="Contagem"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 
     <!-- Botão Gerar Relatório -->
@@ -111,11 +114,12 @@
             android:contentDescription="Gerar Relatório"/>
 
         <TextView
-            android:layout_width="143dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:text="Gerar Relatório"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 
     <!-- Botão Sair -->
@@ -139,7 +143,8 @@
             android:paddingStart="16dp"
             android:text="Sair"
             android:textColor="#FF0000"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 
 </LinearLayout>
