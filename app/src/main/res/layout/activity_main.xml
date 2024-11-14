@@ -1,30 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#D3D3D3"
+    android:padding="16dp">
 
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/your_logo" />
+
+    <!-- Título -->
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="55dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="16dp"
-        android:text="Mazashi"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="CONTROLE DE ESTOQUE"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_marginTop="16dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:textColor="#000" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Ícone do Usuário -->
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_user"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo de e-mail -->
+    <EditText
+        android:id="@+id/emailField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" e-mail"
+        android:inputType="textEmailAddress"
+        android:drawableLeft="@drawable/ic_email"
+        android:layout_marginTop="8dp"
+        android:padding="10dp" />
+
+    <!-- Campo de senha -->
+    <EditText
+        android:id="@+id/passwordField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" senha"
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/ic_password"
+        android:layout_marginTop="8dp"
+        android:padding="10dp" />
+
+    <!-- Botão de login -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Entrar"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFF" />
+
+    <!-- Ícone de impressão digital -->
+    <ImageView
+        android:id="@+id/fingerprintIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_fingerprint"
+        android:layout_marginTop="16dp" />
+
+    <!-- Links de esquecimento de senha e cadastro -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/forgotPasswordLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Esqueceu sua senha?"
+            android:textColor="#4A90E2"
+            android:textSize="14sp"
+            android:paddingEnd="8dp" />
+
+        <TextView
+            android:id="@+id/registerLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Não possui conta? Registre-se"
+            android:textColor="#FF6347"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>
