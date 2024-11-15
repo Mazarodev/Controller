@@ -27,13 +27,13 @@ public class MenuComun extends AppCompatActivity {
 
     // Método para abrir a tela de Contagem
     public void openContagem(View view) {
-        Intent intent = new Intent(MenuComun.this, ContagemActivity.class);
+        Intent intent = new Intent(MenuComun.this, Contagem.class);
         startActivity(intent);
     }
 
     // Método para abrir a tela de Relatório
     public void openRelatorio(View view) {
-        Intent intent = new Intent(MenuComun.this, RelatorioActivity.class);
+        Intent intent = new Intent(MenuComun.this, Relatorio.class);
         startActivity(intent);
     }
 

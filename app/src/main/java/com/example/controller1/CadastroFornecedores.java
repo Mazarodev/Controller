@@ -1,5 +1,6 @@
 package com.example.controller1;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -12,19 +13,20 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CadastroFornecedores extends AppCompatActivity {
 
     private EditText editRazaoSocial, editCnpj, editEndereco, editContato;
-    private Button btnSalvarFornecedor;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_fornecedores);
 
         // Inicializando os campos
-        editRazaoSocial = findViewById(R.id.editRazaoSocial);
-        editCnpj = findViewById(R.id.editCnpj);
-        editEndereco = findViewById(R.id.editEndereco);
-        editContato = findViewById(R.id.editContato);
-        btnSalvarFornecedor = findViewById(R.id.btnSalvarFornecedor);
+        editRazaoSocial = findViewById(R.id.edit_RazaoSocial);
+        editCnpj = findViewById(R.id.edit_CNPJ);
+        editEndereco = findViewById(R.id.edit_Endereco);
+        editContato = findViewById(R.id.edit_Contato);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        Button btnSalvarFornecedor = findViewById(R.id.btn_Salvar2);
 
         // Configurando o clique do botão Salvar
         btnSalvarFornecedor.setOnClickListener(new View.OnClickListener() {

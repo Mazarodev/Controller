@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NOVO FORNECEDOR"
+        android:text="NOVO USUÁRIO"
         android:drawableStart="@drawable/ic_add"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -34,82 +34,78 @@
         android:layout_marginTop="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Razão Social:"
+        android:text="Nome:"
         android:textSize="20dp"
         android:textStyle="bold"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
-        android:id="@+id/edit_RazaoSocial"
-        android:hint="..."
+        android:id="@+id/edit_Nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@drawable/botao_sair"
         android:padding="12dp"
         android:inputType="textPersonName"
-        tools:ignore="HardcodedText,LabelFor" />
+        tools:ignore="LabelFor" />
 
     <!-- Campo E-mail -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CNPJ:"
+        android:text="E-mail:"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
-        android:id="@+id/edit_CNPJ"
-        android:hint="Apenas números..."
+        android:id="@+id/edit_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@drawable/botao_sair"
         android:padding="12dp"
         android:inputType="textEmailAddress"
-        tools:ignore="HardcodedText,LabelFor" />
+        tools:ignore="LabelFor" />
 
     <!-- Campo Senha -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Endereço:"
+        android:text="Senha:"
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
-        android:id="@+id/edit_Endereco"
-        android:hint="..."
+        android:id="@+id/edit_Senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/botao_sair"
         android:padding="12dp"
         android:inputType="textPassword"
-        tools:ignore="Autofill,HardcodedText,LabelFor" />
+        tools:ignore="Autofill,LabelFor" />
 
     <!-- Campo Confirmar Senha -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contato:"
+        android:text="Confirmar senha:"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
-        android:id="@+id/edit_Contato"
-        android:hint="De preferência o mesmo do WhatsApp..."
+        android:id="@+id/edit_ConfirmarSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/botao_sair"
         android:padding="12dp"
         android:inputType="textPassword"
-        tools:ignore="Autofill,HardcodedText,LabelFor" />
+        tools:ignore="Autofill,LabelFor" />
 
     <!-- Botão Salvar -->
     <Button
-        android:id="@+id/btn_Salvar2"
+        android:id="@+id/btn_Salvar"
         android:layout_width="101dp"
         android:layout_height="60dp"
         android:layout_marginTop="33dp"
@@ -122,8 +118,8 @@
 
     <!-- Logo -->
     <ImageView
-        android:layout_width="142dp"
-        android:layout_height="118dp"
+        android:layout_width="148dp"
+        android:layout_height="127dp"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:src="@drawable/your_logo"

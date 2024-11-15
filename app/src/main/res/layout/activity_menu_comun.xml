@@ -11,36 +11,41 @@
     <!-- Título e Logo do Usuário -->
     <ImageView
         android:id="@+id/logoImage2"
-        android:layout_width="357dp"
-        android:layout_height="64dp"
+        android:layout_width="394dp"
+        android:layout_height="94dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
-        android:src="@drawable/your_logo" />
+        android:src="@drawable/your_logo"
+        tools:ignore="ContentDescription" />
 
+    <!-- Botão Cadastro de Produtos -->
     <TextView
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:drawablePadding="8dp"
+        android:gravity="center"
         android:text="USUÁRIO COMUM"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:drawablePadding="8dp"
-        android:layout_marginBottom="24dp"/>
+        tools:ignore="HardcodedText" />
 
-    <!-- Botão Cadastro de Produtos -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
-        android:onClick="openCadastroProdutos">
+        android:onClick="openCadastroProdutos"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_add_product_icon"
-            android:contentDescription="Cadastro de Produtos"/>
+            android:contentDescription="Cadastro de Produtos"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:background="@drawable/rounded_background"
@@ -64,7 +69,8 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
-        android:onClick="openCadastroFornecedores">
+        android:onClick="openCadastroFornecedores"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="24dp"
@@ -95,13 +101,15 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
-        android:onClick="openContagem">
+        android:onClick="openContagem"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_count_icon"
-            android:contentDescription="Contagem"/>
+            android:contentDescription="Contagem"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:background="@drawable/rounded_background"
@@ -114,7 +122,8 @@
             android:text="Contagem"
             android:textSize="16sp"
             android:gravity="center_horizontal"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <!-- Botão Gerar Relatório -->
@@ -124,13 +133,15 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
-        android:onClick="openRelatorio">
+        android:onClick="openRelatorio"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_report_icon"
-            android:contentDescription="Gerar Relatório"/>
+            android:contentDescription="Gerar Relatório"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:background="@drawable/rounded_background"
@@ -143,23 +154,27 @@
             android:text="Gerar Relatório"
             android:textSize="16sp"
             android:gravity="center_horizontal"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <!-- Botão Sair -->
     <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="32dp"
-        android:onClick="logout">
+        android:layout_marginTop="120dp"
+        android:onClick="logout"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_logout_icon"
-            android:contentDescription="Sair"/>
+            android:contentDescription="Sair"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:background="@drawable/botao_sair"
@@ -170,9 +185,11 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="Sair"
+            android:textStyle="bold"
             android:textSize="16sp"
             android:gravity="center_horizontal"
-            android:textColor="#F44336"/>
+            android:textColor="#F44336"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </LinearLayout>
