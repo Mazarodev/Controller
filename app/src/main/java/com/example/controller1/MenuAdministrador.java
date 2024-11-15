@@ -15,7 +15,7 @@ public class MenuAdministradorActivity extends AppCompatActivity {
 
     // Método para abrir a tela de Cadastro de Produtos
     public void openCadastroProdutos(View view) {
-        Intent intent = new Intent(MenuAdministradorActivity.this, CadastroProdutosActivity.class);
+        Intent intent = new Intent(MenuAdministradorActivity.this, CadastroProdutos.class);
         startActivity(intent);
     }
 
@@ -26,7 +26,7 @@ public class MenuAdministradorActivity extends AppCompatActivity {
     }
 
     // Método para abrir a tela de Cadastro de Usuários
-    public void openCadastroFornecedores(View view) {
+    public void openCadastroUsuarios(View view) {
         Intent intent = new Intent(MenuAdministradorActivity.this, CadastroUsuariosActivity.class);
         startActivity(intent);
     }
@@ -44,7 +44,7 @@ public class MenuAdministradorActivity extends AppCompatActivity {
     }
 
     // Método para abrir a tela de Estoque
-    public void openRelatorio(View view) {
+    public void openEstoque(View view) {
         Intent intent = new Intent(MenuAdministradorActivity.this, EstoqueActivity.class);
         startActivity(intent);
     }

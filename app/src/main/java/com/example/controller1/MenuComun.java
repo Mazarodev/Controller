@@ -15,13 +15,13 @@ public class MenuComunActivity extends AppCompatActivity {
 
     // Método para abrir a tela de Cadastro de Produtos
     public void openCadastroProdutos(View view) {
-        Intent intent = new Intent(MenuComunActivity.this, CadastroProdutosActivity.class);
+        Intent intent = new Intent(MenuComunActivity.this, CadastroProdutos.class);
         startActivity(intent);
     }
 
     // Método para abrir a tela de Cadastro de Fornecedores
     public void openCadastroFornecedores(View view) {
-        Intent intent = new Intent(MenuComunActivity.this, CadastroFornecedoresActivity.class);
+        Intent intent = new Intent(MenuComunActivity.this, CadastroFornecedores.class);
         startActivity(intent);
     }
 

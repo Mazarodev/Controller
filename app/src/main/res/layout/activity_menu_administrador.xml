@@ -81,7 +81,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
-        android:onClick="openCadastroFornecedores">
+        android:onClick="openCadastroUsuarios">
 
         <ImageView
             android:layout_width="24dp"
@@ -153,7 +153,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
-        android:onClick="openContagem">
+        android:onClick="openEstoque">
 
         <ImageView
             android:layout_width="24dp"
