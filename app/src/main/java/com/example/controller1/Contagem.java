@@ -6,13 +6,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class Contagem extends AppCompatActivity {
+class Contagem extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +35,7 @@ public class Contagem extends AppCompatActivity {
     // Função para validar o código de barras no banco de dados
     private void validarCodigoBarras(String codigo) {
         // Simula uma consulta no banco de dados (substitua com código real)
-        Produto produto = consultaProdutoNoBanco(codigo);
+        CadastroProdutos produto = consultaProdutoNoBanco(codigo);
 
         if (produto != null) {
             // Produto encontrado, exibe informações
@@ -51,12 +47,12 @@ public class Contagem extends AppCompatActivity {
     }
 
     // Exemplo de consulta no banco de dados (dummy)
-    private Produto consultaProdutoNoBanco(String codigo) {
+    private CadastroProdutos consultaProdutoNoBanco(String codigo) {
         // Simule a consulta aqui
         return null; // Retorna null se não encontrar
     }
 
-    private void mostrarInformacoesProduto(Produto produto) {
+    private void mostrarInformacoesProduto(CadastroProdutos produto) {
         // Implementa o código para exibir as informações do produto
     }
 

@@ -46,7 +46,7 @@
         android:background="@drawable/botao_sair"
         android:padding="12dp"
         android:inputType="textPersonName"
-        tools:ignore="LabelFor" />
+        tools:ignore="HardcodedText,LabelFor" />
 
     <!-- Campo E-mail -->
     <TextView
