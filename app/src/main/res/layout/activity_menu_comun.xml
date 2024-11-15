@@ -114,12 +114,17 @@
             android:contentDescription="Gerar Relatório"/>
 
         <TextView
+            android:background="@drawable/rounded_background"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="Gerar Relatório"
             android:textSize="16sp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <!-- Botão Sair -->

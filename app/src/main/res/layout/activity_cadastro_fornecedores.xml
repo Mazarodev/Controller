@@ -75,9 +75,9 @@
 
     <!-- Logo na parte inferior -->
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/your_logo"
+        android:layout_width="96dp"
+        android:layout_height="83dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:src="@drawable/your_logo" />
 </LinearLayout>
