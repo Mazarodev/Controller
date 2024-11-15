@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MenuComunActivity extends AppCompatActivity {
+public class MenuComun extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,31 +15,31 @@ public class MenuComunActivity extends AppCompatActivity {
 
     // Método para abrir a tela de Cadastro de Produtos
     public void openCadastroProdutos(View view) {
-        Intent intent = new Intent(MenuComunActivity.this, CadastroProdutos.class);
+        Intent intent = new Intent(MenuComun.this, CadastroProdutos.class);
         startActivity(intent);
     }
 
     // Método para abrir a tela de Cadastro de Fornecedores
     public void openCadastroFornecedores(View view) {
-        Intent intent = new Intent(MenuComunActivity.this, CadastroFornecedores.class);
+        Intent intent = new Intent(MenuComun.this, CadastroFornecedores.class);
         startActivity(intent);
     }
 
     // Método para abrir a tela de Contagem
     public void openContagem(View view) {
-        Intent intent = new Intent(MenuComunActivity.this, ContagemActivity.class);
+        Intent intent = new Intent(MenuComun.this, ContagemActivity.class);
         startActivity(intent);
     }
 
     // Método para abrir a tela de Relatório
     public void openRelatorio(View view) {
-        Intent intent = new Intent(MenuComunActivity.this, RelatorioActivity.class);
+        Intent intent = new Intent(MenuComun.this, RelatorioActivity.class);
         startActivity(intent);
     }
 
     // Método para realizar logout
     public void logout(View view) {
-        Intent intent = new Intent(MenuComunActivity.this, MainActivity.class);
+        Intent intent = new Intent(MenuComun.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
