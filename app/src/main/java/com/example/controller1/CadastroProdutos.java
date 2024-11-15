@@ -1,5 +1,6 @@
 package com.example.controller1;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,6 +14,7 @@ public class CadastroProdutos extends AppCompatActivity {
     private EditText editDescricao, editCodigoBarra, editPreco, editFornecedor;
     private Button btnSalvarUsuario;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
