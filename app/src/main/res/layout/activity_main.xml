@@ -14,8 +14,8 @@
     <!-- Título -->
     <ImageView
         android:id="@+id/logoImage"
-        android:layout_width="147dp"
-        android:layout_height="139dp"
+        android:layout_width="163dp"
+        android:layout_height="148dp"
         android:src="@drawable/your_logo"
         tools:ignore="ContentDescription" />
 
@@ -62,7 +62,7 @@
         android:drawableLeft="@drawable/ic_password"
         android:layout_marginTop="15dp"
         android:padding="12dp"
-        tools:ignore="HardcodedText,RtlHardcoded" />
+        tools:ignore="Autofill,HardcodedText,RtlHardcoded" />
 
     <!-- Botão de login -->
     <Button
@@ -82,7 +82,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_fingerprint"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        tools:ignore="ContentDescription" />
 
     <!-- Links de esquecimento de senha e cadastro -->
     <LinearLayout
@@ -98,7 +99,8 @@
             android:text="Esqueceu sua senha?"
             android:textColor="#4A90E2"
             android:textSize="14sp"
-            android:paddingEnd="8dp" />
+            android:paddingEnd="8dp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
 
         <TextView
             android:id="@+id/CadastroLink"
