@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,13 +10,15 @@
     android:padding="16dp">
 
     <!-- Logo -->
-    <ImageView
-        android:id="@+id/logoImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/your_logo" />
 
     <!-- Título -->
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="147dp"
+        android:layout_height="139dp"
+        android:src="@drawable/your_logo"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +26,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        android:textColor="#000" />
+        android:textColor="#000"
+        tools:ignore="HardcodedText" />
 
     <!-- Ícone do Usuário -->
     <ImageView
@@ -31,39 +35,46 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_user"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        tools:ignore="ContentDescription" />
 
     <!-- Campo de e-mail -->
     <EditText
         android:id="@+id/campoEmail"
+        android:background="@drawable/botao_sair"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint=" e-mail"
+        android:hint=" E-mail"
         android:inputType="textEmailAddress"
         android:drawableLeft="@drawable/ic_email"
-        android:layout_marginTop="8dp"
-        android:padding="10dp" />
+        android:layout_marginTop="11dp"
+        android:padding="12dp"
+        tools:ignore="Autofill,HardcodedText,RtlHardcoded" />
 
     <!-- Campo de senha -->
     <EditText
         android:id="@+id/campoSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint=" senha"
+        android:background="@drawable/botao_sair"
+        android:hint=" Senha"
         android:inputType="textPassword"
         android:drawableLeft="@drawable/ic_password"
-        android:layout_marginTop="8dp"
-        android:padding="10dp" />
+        android:layout_marginTop="15dp"
+        android:padding="12dp"
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
     <!-- Botão de login -->
     <Button
         android:id="@+id/btLogin"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entrar"
+        android:textSize="18dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#4CAF50"
-        android:textColor="#FFF" />
+        android:textColor="#FFF"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <!-- Ícone de impressão digital -->
     <ImageView
@@ -95,7 +106,8 @@
             android:layout_height="wrap_content"
             android:text="Não possui conta? Registre-se"
             android:textColor="#FF6347"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </LinearLayout>
