@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -42,12 +43,18 @@
             android:contentDescription="Cadastro de Produtos"/>
 
         <TextView
+            android:background="@drawable/rounded_background"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="Cadastro de Produtos"
             android:textSize="16sp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <!-- Botão Cadastro de Fornecedores -->
@@ -63,15 +70,22 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_add_supplier_icon"
-            android:contentDescription="Cadastro de Fornecedores"/>
+            android:contentDescription="Cadastro de Fornecedores"
+            tools:ignore="HardcodedText" />
 
         <TextView
+            android:background="@drawable/rounded_background"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="Cadastro de Fornecedores"
             android:textSize="16sp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <!-- Botão Contagem -->
@@ -90,12 +104,17 @@
             android:contentDescription="Contagem"/>
 
         <TextView
+            android:background="@drawable/rounded_background"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="Contagem"
             android:textSize="16sp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <!-- Botão Gerar Relatório -->
@@ -143,13 +162,17 @@
             android:contentDescription="Sair"/>
 
         <TextView
-            android:layout_width="68dp"
+            android:background="@drawable/botao_sair"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="Sair"
-            android:textColor="#FF0000"
             android:textSize="16sp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:textColor="#F44336"/>
     </LinearLayout>
 
 </LinearLayout>
