@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
         android:src="@drawable/your_logo"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,InvalidId" />
 
     <!-- Botão Cadastro de Produtos -->
 
