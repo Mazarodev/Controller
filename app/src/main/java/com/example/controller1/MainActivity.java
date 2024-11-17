@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Ação para Registrar
-                Intent intent = new Intent(MainActivity.this, Cadastro.class);
+                Intent intent = new Intent(MainActivity.this, CadastroUsuarios.class);
                 startActivity(intent);
             }
         });
