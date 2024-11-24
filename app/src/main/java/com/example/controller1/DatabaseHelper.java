@@ -93,9 +93,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Método para adicionar um usuário
-    public boolean AddUsuario(String nome, String email, String senha) {
+    public boolean AddUsuario(String nome, String email, String senha, String tipoUsuario) {
         if (verificarEmailExiste(email)) {
-            Log.e("DatabaseHelper", "E-mail já registrado: "+email);
+            Log.e("DatabaseHelper", "E-mail já registrado: " + email);
             return false; // E-mail já está registrado
         }
 
@@ -104,19 +104,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("nome", nome);
         values.put("email", email);
         values.put("senha", senha);
+        values.put("tipo_usuario", tipoUsuario); // Adicionando tipo_usuario
 
         long resultado = db.insert(TABLE_USUARIO, null, values);
 
         if (resultado == -1) {
-            Log.e("DatabaseHelper",
-                    ("Erro ao inserir usuário: nome="+nome+", email="+email));
-            db.close(); // Fechar o banco após a operação
+            Log.e("DatabaseHelper", "Erro ao inserir usuário: nome=" + nome + ", email=" + email);
+            db.close();
             return false; // Retorna false se a inserção falhar
         }
 
-        db.close(); // Fechar o banco após a operação
+        db.close();
         return true; // Retorna true se a inserção foi bem-sucedida
     }
+
 
     // Método para verificar se o e-mail já está registrado
     public boolean verificarEmailExiste(String email) {
@@ -146,15 +147,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Método para buscar todos os fornecedores
     public Cursor getAllFornecedores() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+TABLE_FORNECEDOR,null);
+        return db.rawQuery("SELECT * FROM " + TABLE_FORNECEDOR, null);
     }
 
     // Método para buscar todos os usuários
     public Cursor getAllUsuarios() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+TABLE_USUARIO,null);
+        return db.rawQuery("SELECT * FROM " + TABLE_USUARIO, null);
+    }
+
+    public boolean AddUsuario(String nome, String email, String senha) {
+        return false;
     }
 }
-
-
-
