@@ -1,6 +1,7 @@
 package com.example.controller1;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CadastroUsuarios extends AppCompatActivity {
 
     private EditText editNome, editEmail, editSenha, editConfirmarSenha;
+    private DatabaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -25,6 +27,9 @@ public class CadastroUsuarios extends AppCompatActivity {
         editSenha = findViewById(R.id.edit_Senha);
         editConfirmarSenha = findViewById(R.id.edit_ConfirmarSenha);
         Button btnSalvar = findViewById(R.id.btn_Salvar);
+
+        // Inicializar o banco de dados
+        databaseHelper = new DatabaseHelper(this);
 
         // Configurando o botão de salvar
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -48,18 +53,29 @@ public class CadastroUsuarios extends AppCompatActivity {
             return;
         }
 
+        // Verificar se o e-mail já está registrado
+        if (databaseHelper.verificarEmailExiste(email)) {
+            Toast.makeText(this, "E-mail já está registrado.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Verificar se as senhas coincidem
         if (!senha.equals(confirmarSenha)) {
             Toast.makeText(this, "As senhas não coincidem.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Aqui você pode salvar o usuário no banco de dados ou enviar os dados para um servidor
-        // Por exemplo:
-        // Usuario novoUsuario = new Usuario(nome, email, senha);
-        // salvarUsuarioNoBanco(novoUsuario);
+        // Inserir o usuário no banco de dados
+        boolean sucesso = databaseHelper.AddUsuario(nome, email, senha);
+        if (sucesso) {
+            Toast.makeText(this, "Usuário salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(CadastroUsuarios.this, MenuComun.class);
+            startActivity(intent);
+            finish(); // Fecha a atividade de cadastro
+        } else {
+            Toast.makeText(this, "Erro ao salvar usuário.", Toast.LENGTH_SHORT).show();
+        }
 
-        Toast.makeText(this, "Usuário salvo com sucesso!", Toast.LENGTH_SHORT).show();
     }
 
 }

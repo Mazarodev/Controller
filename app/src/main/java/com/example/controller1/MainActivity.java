@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText CampoEmail;
     private EditText CampoSenha;
+    private DatabaseHelper dbHelper; // Variável para o banco de dados
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         TextView esqueceuSenhaLink = findViewById(R.id.EsqueceuSenhaLink);
         TextView cadastroLink = findViewById(R.id.CadastroLink);
 
+        // Inicializar o banco de dados
+        dbHelper = new DatabaseHelper(this);
+
         // Configurar ação do botão de login
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,8 +40,18 @@ public class MainActivity extends AppCompatActivity {
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Adicione a lógica de autenticação aqui
-                    Toast.makeText(MainActivity.this, "Login efetuado", Toast.LENGTH_SHORT).show();
+                    // Verificar se o usuário está registrado
+                    boolean loginValido = dbHelper.verificarLogin(email, password);
+
+                    if (loginValido) {
+                        Toast.makeText(MainActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
+                        // Redirecionar para outra tela (exemplo: tela inicial)
+                        Intent intent = new Intent(MainActivity.this, MenuComun.class);
+                        startActivity(intent);
+                        finish(); // Fecha a tela de login
+                    } else {
+                        Toast.makeText(MainActivity.this, "Usuário ou senha inválidos!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
