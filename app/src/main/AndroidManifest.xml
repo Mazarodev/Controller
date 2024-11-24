@@ -14,28 +14,28 @@
         tools:targetApi="31">
         <activity
             android:name=".Estoque"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Relatorio"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Contagem"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".CadastroUsuarios"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".CadastroProdutos"
             android:exported="true" />
         <activity
             android:name=".MenuComun"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MenuAdministrador"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".CadastroFornecedores"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
