@@ -62,7 +62,7 @@
             tools:ignore="ContentDescription,RtlHardcoded" />
 
         <ImageView
-            android:id="@+id/downloadpdf"
+            android:id="@+id/downloadRelatorio"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_marginRight="108dp"
