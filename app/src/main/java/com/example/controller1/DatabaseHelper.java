@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "BancoController.db";
@@ -37,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "descricao TEXT," +
                 "codigo_barra TEXT," +
                 "preco REAL," +
-                "id_fornecedor TEXT," +
+                "id_fornecedor INTEGER," +
                 "FOREIGN KEY(id_fornecedor) REFERENCES " + TABLE_FORNECEDOR + "(id_fornecedor))");
 
         // Tabela Estoque
@@ -52,7 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_USUARIO + " (" +
                 "id_usuario INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "nome TEXT," +
-                "email TEXT," +
+                "email TEXT UNIQUE," + // Adicionado UNIQUE para evitar duplicatas
                 "senha TEXT," +
                 "tipo_usuario TEXT NOT NULL CHECK(tipo_usuario IN ('comum', 'administrador')))");
 
@@ -62,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "id_produto INTEGER," +
                 "qtd_contada INTEGER," +
                 "data_contagem DATETIME," +
-                "id_usuario TEXT," +
+                "id_usuario INTEGER," +
                 "FOREIGN KEY(id_produto) REFERENCES " + TABLE_PRODUTO + "(id_produto)," +
                 "FOREIGN KEY(id_usuario) REFERENCES " + TABLE_USUARIO + "(id_usuario))");
     }
@@ -78,20 +79,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Método para adicionar um fornecedor
-    public boolean addFornecedor(String id_fornecedor, String razaoSocial, String cnpj, String endereco, String contato) {
+    public boolean addFornecedor(String razaoSocial, String cnpj, String endereco, String contato) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id_fornecedor", id_fornecedor);
         values.put("razao_social", razaoSocial);
         values.put("cnpj", cnpj);
         values.put("endereco", endereco);
         values.put("contato", contato);
+
         long result = db.insert(TABLE_FORNECEDOR, null, values);
-        return result != -1;
+        db.close(); // Fechar o banco após a operação
+        return result != -1; // Retorna true se a inserção foi bem-sucedida
     }
 
     // Método para adicionar um usuário
     public boolean AddUsuario(String nome, String email, String senha) {
+        if (verificarEmailExiste(email)) {
+            Log.e("DatabaseHelper", "E-mail já registrado: "+email);
+            return false; // E-mail já está registrado
+        }
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nome", nome);
@@ -99,44 +106,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("senha", senha);
 
         long resultado = db.insert(TABLE_USUARIO, null, values);
-        db.close();
-        return resultado != -1;
+
+        if (resultado == -1) {
+            Log.e("DatabaseHelper",
+                    ("Erro ao inserir usuário: nome="+nome+", email="+email));
+            db.close(); // Fechar o banco após a operação
+            return false; // Retorna false se a inserção falhar
+        }
+
+        db.close(); // Fechar o banco após a operação
+        return true; // Retorna true se a inserção foi bem-sucedida
     }
 
     // Método para verificar se o e-mail já está registrado
     public boolean verificarEmailExiste(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USUARIO, new String[]{"id_usuario"},
-                email + "=?", new String[]{email},
+                "email=?", new String[]{email},
                 null, null, null);
+
         boolean existe = cursor.getCount() > 0;
         cursor.close();
-        db.close();
-        return existe;
+        return existe; // Retorna true se o e-mail já existe
     }
 
     public boolean verificarLogin(String email, String senha) {
         SQLiteDatabase db = this.getReadableDatabase();
-        // Consulta para verificar se o e-mail e senha existem
+
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM Usuario WHERE email = ? AND senha = ?",
-                new String[]{email, senha}
-        );
+                ("SELECT * FROM Usuario WHERE email=? AND senha=?"),
+                new String[]{email, senha});
 
         boolean usuarioExiste = cursor.getCount() > 0; // Verifica se encontrou um registro
         cursor.close();
-        return usuarioExiste;
+
+        return usuarioExiste; // Retorna true se o login for válido
     }
 
     // Método para buscar todos os fornecedores
     public Cursor getAllFornecedores() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_FORNECEDOR, null);
+        return db.rawQuery("SELECT * FROM "+TABLE_FORNECEDOR,null);
     }
 
-    // Método para buscar todos os fornecedores
+    // Método para buscar todos os usuários
     public Cursor getAllUsuarios() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_USUARIO, null);
+        return db.rawQuery("SELECT * FROM "+TABLE_USUARIO,null);
     }
 }
+
+
+

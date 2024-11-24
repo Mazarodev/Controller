@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (loginValido) {
                         Toast.makeText(MainActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
-                        // Redirecionar para outra tela (exemplo: tela inicial)
+                        // Redirecionar para MenuComun após login bem-sucedido
                         Intent intent = new Intent(MainActivity.this, MenuComun.class);
                         startActivity(intent);
                         finish(); // Fecha a tela de login
