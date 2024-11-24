@@ -14,7 +14,6 @@
         android:src="@drawable/ic_iconback"
         android:contentDescription="Voltar"
         android:layout_gravity="start"
-        android:onClick="onBackPressed"
         tools:ignore="HardcodedText" />
 
     <!-- Título -->
@@ -26,34 +25,33 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="30dp"
         tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
     <!-- Campo Nome -->
     <TextView
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="45dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nome:"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_Nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:background="@drawable/botao_sair"
         android:padding="12dp"
         android:inputType="textPersonName"
-        tools:ignore="HardcodedText,LabelFor" />
+        tools:ignore="Autofill,HardcodedText,LabelFor" />
 
     <!-- Campo E-mail -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="E-mail:"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
@@ -61,18 +59,17 @@
         android:id="@+id/edit_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:background="@drawable/botao_sair"
         android:padding="12dp"
         android:inputType="textEmailAddress"
-        tools:ignore="LabelFor" />
+        tools:ignore="Autofill,LabelFor" />
 
     <!-- Campo Senha -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Senha:"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
@@ -91,7 +88,7 @@
         android:layout_height="wrap_content"
         android:text="Confirmar senha:"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
@@ -106,29 +103,23 @@
     <!-- Botão Salvar -->
     <Button
         android:id="@+id/btn_Salvar"
-        android:layout_width="101dp"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="23dp"
         android:backgroundTint="@color/black"
         android:text="Salvar"
-        android:textSize="18dp"
-        android:textStyle="bold"
         android:textColor="@color/white"
-        tools:ignore="HardcodedText,SpUsage" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:ignore ="HardcodedText,SpUsage" />
 
     <!-- Logo -->
     <ImageView
         android:layout_width="148dp"
         android:layout_height="127dp"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="49dp"
         android:src="@drawable/your_logo"
         tools:ignore="ContentDescription" />
-
-    <Spinner
-        android:id="@+id/spinnerTipoUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
 
 </LinearLayout>

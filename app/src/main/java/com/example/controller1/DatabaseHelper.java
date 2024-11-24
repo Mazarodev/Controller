@@ -92,11 +92,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1; // Retorna true se a inserção foi bem-sucedida
     }
 
-    // Método para adicionar um usuário
     public boolean AddUsuario(String nome, String email, String senha, String tipoUsuario) {
+
         if (verificarEmailExiste(email)) {
+
             Log.e("DatabaseHelper", "E-mail já registrado: " + email);
+
             return false; // E-mail já está registrado
+
         }
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -109,6 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long resultado = db.insert(TABLE_USUARIO, null, values);
 
         if (resultado == -1) {
+
             Log.e("DatabaseHelper", "Erro ao inserir usuário: nome=" + nome + ", email=" + email);
             db.close();
             return false; // Retorna false se a inserção falhar
@@ -117,7 +121,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return true; // Retorna true se a inserção foi bem-sucedida
     }
-
 
     // Método para verificar se o e-mail já está registrado
     public boolean verificarEmailExiste(String email) {
@@ -154,9 +157,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllUsuarios() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_USUARIO, null);
-    }
-
-    public boolean AddUsuario(String nome, String email, String senha) {
-        return false;
     }
 }

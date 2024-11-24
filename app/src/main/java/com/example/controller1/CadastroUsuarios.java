@@ -4,11 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CadastroUsuarios extends AppCompatActivity {
 
     private EditText editNome, editEmail, editSenha, editConfirmarSenha;
-    private Spinner spinnerTipoUsuario; // Spinner para selecionar o tipo de usuário
     private DatabaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
@@ -30,24 +26,12 @@ public class CadastroUsuarios extends AppCompatActivity {
         editEmail = findViewById(R.id.edit_Email);
         editSenha = findViewById(R.id.edit_Senha);
         editConfirmarSenha = findViewById(R.id.edit_ConfirmarSenha);
-        spinnerTipoUsuario = findViewById(R.id.spinnerTipoUsuario); // Inicializando o Spinner
 
         Button btnSalvar = findViewById(R.id.btn_Salvar);
         databaseHelper = new DatabaseHelper(this);
 
-        // Configurando o Spinner com os tipos de usuário
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.tipo_usuario_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTipoUsuario.setAdapter(adapter);
-
         // Configurando o clique do botão de salvar
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                salvarUsuario();
-            }
-        });
+        btnSalvar.setOnClickListener(v -> salvarUsuario());
     }
 
     private void salvarUsuario() {
@@ -55,9 +39,6 @@ public class CadastroUsuarios extends AppCompatActivity {
         String email = editEmail.getText().toString().trim();
         String senha = editSenha.getText().toString().trim();
         String confirmarSenha = editConfirmarSenha.getText().toString().trim();
-
-        // Obtendo o tipo de usuário selecionado
-        String tipoUsuario = spinnerTipoUsuario.getSelectedItem().toString();
 
         // Verificando se os campos estão preenchidos
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty()) {
@@ -75,6 +56,9 @@ public class CadastroUsuarios extends AppCompatActivity {
             return;
         }
 
+        // Definindo um tipo de usuário padrão (por exemplo, "comum")
+        String tipoUsuario = "comum"; // Você pode alterar isso conforme necessário
+
         // Chamando o método para adicionar o usuário no banco de dados
         boolean sucesso = databaseHelper.AddUsuario(nome, email, senha, tipoUsuario);
 
@@ -91,7 +75,3 @@ public class CadastroUsuarios extends AppCompatActivity {
         }
     }
 }
-
-
-
-
