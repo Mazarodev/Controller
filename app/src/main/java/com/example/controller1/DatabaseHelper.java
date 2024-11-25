@@ -129,17 +129,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true; // Retorna true se a inserção foi bem-sucedida
     }
 
-    // Método para verificar se o e-mail já está registrado
     public boolean verificarEmailExiste(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_USUARIO, new String[]{"id_usuario"},
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = null;
+    boolean existe = false;
+
+    try {
+        cursor = db.query(TABLE_USUARIO, new String[]{"id_usuario"},
                 "email=?", new String[]{email},
                 null, null, null);
-
-        boolean existe = cursor.getCount() > 0;
-        cursor.close();
-        return existe; // Retorna true se o e-mail já existe
+        existe = cursor.getCount() > 0;
+    } finally {
+        if (cursor != null) cursor.close();
+        db.close();
     }
+
+    return existe;
+    }
+    
 
     public boolean verificarLogin(String email, String senha) {
         SQLiteDatabase db = this.getReadableDatabase();
