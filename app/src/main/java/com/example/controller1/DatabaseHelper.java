@@ -78,6 +78,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Método para adicionar um produto
+    public boolean addProduto(String descricao, String codigoBarra, double preco, int idFornecedor) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues values = new ContentValues();
+    values.put("descricao", descricao);
+    values.put("codigo_barra", codigoBarra);
+    values.put("preco", preco);
+    values.put("id_fornecedor", idFornecedor);
+
+    long result = db.insert(TABLE_PRODUTO, null, values);
+    db.close(); // Fechar o banco após a operação
+    return result != -1; // Retorna true se a inserção foi bem-sucedida
+    }
+    
     // Método para adicionar um fornecedor
     public boolean addFornecedor(String razaoSocial, String cnpj, String endereco, String contato) {
         SQLiteDatabase db = this.getWritableDatabase();
