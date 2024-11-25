@@ -20,6 +20,9 @@ public class CadastroProdutos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_produtos);
 
+        // Inicializando DatabaseHelper
+        dbHelper = new DatabaseHelper(this);
+        
         // Inicializando os campos
         editDescricao = findViewById(R.id.editDescricao);
         editCodigoBarra = findViewById(R.id.editCodigoBarra);
