@@ -90,7 +90,7 @@ public class CadastroProdutos extends AppCompatActivity {
         String fornecedor = editFornecedor.getText().toString().trim();
     
         // Você precisará obter o id do fornecedor baseado no nome ou adicioná-lo à tabela de fornecedores
-        long fornecedorId = dbHelper.addFornecedor(fornecedor, null, null, null); // Modifique conforme necessário
+        long fornecedorId = dbHelper.addFornecedor(fornecedor, preco, codigoBarra, descricao); // Modifique conforme necessário
     
         if (fornecedorId != -1) {
             boolean sucesso = dbHelper.addProduto(descricao, codigoBarra, preco, (int) fornecedorId);
