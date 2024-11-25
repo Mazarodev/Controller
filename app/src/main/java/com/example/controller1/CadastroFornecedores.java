@@ -1,8 +1,10 @@
 package com.example.controller1;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CadastroFornecedores extends AppCompatActivity {
 
     private EditText editRazaoSocial, editCnpj, editEndereco, editContato;
+    private DatabaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -27,6 +30,8 @@ public class CadastroFornecedores extends AppCompatActivity {
         editContato = findViewById(R.id.edit_Contato);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         Button btnSalvarFornecedor = findViewById(R.id.btn_Salvar2);
+
+        databaseHelper = new DatabaseHelper(this);
 
         // Configurando o clique do botão Salvar
         btnSalvarFornecedor.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +79,25 @@ public class CadastroFornecedores extends AppCompatActivity {
             return false;
         }
 
-        return true; // Se todos os campos forem válidos
+        String razaoSocial = editRazaoSocial.getText().toString().trim();
+        String cnpj = editCnpj.getText().toString().trim();
+        String endereco = editEndereco.getText().toString().trim();
+        String contato = editContato.getText().toString().trim();
+
+        boolean sucesso = databaseHelper.addFornecedor(cnpj, endereco, contato, razaoSocial);
+
+        Log.d("CadastroFornecedores", "Tentativa de salvar fornecedor: Razão Social=" + editRazaoSocial + ", cnpj=" + editCnpj);
+
+        if (sucesso) {
+            Toast.makeText(this, "Fornecedor salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(CadastroFornecedores.this, MenuComun.class);
+            startActivity(intent);
+            finish(); // Finaliza a atividade atual
+        } else {
+            Toast.makeText(this, "Erro ao salvar fornecedor.", Toast.LENGTH_SHORT).show();
+            Log.e("CadastroFornecedores", "Falha ao salvar fornecedor: Razão Social=" + editRazaoSocial);
+        }
+        return sucesso;
     }
 
     // Método para validar o CNPJ (implementação simplificada)
