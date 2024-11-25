@@ -37,6 +37,7 @@ public class CadastroProdutos extends AppCompatActivity {
                 if (validarCampos()) {
                     // Se todos os campos forem válidos, exibe uma mensagem de sucesso
                     Toast.makeText(CadastroProdutos.this, "Produto cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                    salvarProduto();
 
                     // Aqui você pode adicionar o código para salvar os dados no banco ou outra ação desejada
                 }
@@ -81,6 +82,28 @@ public class CadastroProdutos extends AppCompatActivity {
             editFornecedor.setError("Fornecedor é obrigatório");
             return false;
         }
+
+        private void salvarProduto() {
+        String descricao = editDescricao.getText().toString().trim();
+        String codigoBarra = editCodigoBarra.getText().toString().trim();
+        double preco = Double.parseDouble(editPreco.getText().toString().trim());
+        String fornecedor = editFornecedor.getText().toString().trim();
+    
+        // Você precisará obter o id do fornecedor baseado no nome ou adicioná-lo à tabela de fornecedores
+        long fornecedorId = dbHelper.addFornecedor(fornecedor, null, null, null); // Modifique conforme necessário
+    
+        if (fornecedorId != -1) {
+            boolean sucesso = dbHelper.addProduto(descricao, codigoBarra, preco, (int) fornecedorId);
+            if (sucesso) {
+                Toast.makeText(this, "Produto cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Erro ao cadastrar fornecedor", Toast.LENGTH_SHORT).show();
+        }
+}
+
 
         return true; // Se todos os campos forem válidos
     }
