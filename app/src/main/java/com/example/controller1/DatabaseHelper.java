@@ -174,7 +174,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     cursor.close();
     return id; // Retorna o ID ou -1 se não encontrado
     }
-    
+
+    // Método de verificação de código de barra
     public boolean codigoBarraExiste(String codigoBarra) {
     SQLiteDatabase db = this.getReadableDatabase();
     Cursor cursor = db.query(TABLE_PRODUTO, new String[]{"id_produto"},
@@ -185,6 +186,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     cursor.close();
     return existe; // Retorna true se o código de barras já existir
     }
+
+    // Método para verificar o tipo do usuário através do email
+    public String getTipoUsuario(String email) {
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = db.query(TABLE_USUARIO, new String[]{"tipo_usuario"},
+            "email=?", new String[]{email},
+            null, null, null);
+
+    String tipoUsuario = null;
+    if (cursor.moveToFirst()) {
+        tipoUsuario = cursor.getString(cursor.getColumnIndexOrThrow("tipo_usuario"));
+    }
+    cursor.close();
+    return tipoUsuario; // Retorna o tipo do usuário ou null se não encontrado
+}
 
 
     // Método para buscar todos os fornecedores
