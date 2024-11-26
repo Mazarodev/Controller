@@ -66,7 +66,7 @@ public class CadastroUsuarios extends AppCompatActivity {
 
         if (sucesso) {
             Toast.makeText(this, "Usuário salvo com sucesso!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(CadastroUsuarios.this, MenuComun.class);
+            Intent intent = new Intent(CadastroUsuarios.this, MainActivity.class);
             startActivity(intent);
             finish(); // Finaliza a atividade atual
         } else {

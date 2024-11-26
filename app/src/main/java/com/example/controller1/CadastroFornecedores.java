@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CadastroFornecedores extends AppCompatActivity {
@@ -28,7 +29,6 @@ public class CadastroFornecedores extends AppCompatActivity {
         editCnpj = findViewById(R.id.edit_CNPJ);
         editEndereco = findViewById(R.id.edit_Endereco);
         editContato = findViewById(R.id.edit_Contato);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         Button btnSalvarFornecedor = findViewById(R.id.btn_Salvar2);
 
         databaseHelper = new DatabaseHelper(this);
@@ -38,10 +38,7 @@ public class CadastroFornecedores extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validarCampos()) {
-                    // Se todos os campos forem válidos, exibe uma mensagem de sucesso
-                    Toast.makeText(CadastroFornecedores.this, "Fornecedor cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-
-                    // Aqui você pode adicionar o código para salvar os dados no banco ou outra ação desejada
+                    salvarFornecedor();
                 }
             }
         });
@@ -49,77 +46,79 @@ public class CadastroFornecedores extends AppCompatActivity {
 
     // Método para validar os campos
     private boolean validarCampos() {
-    if (TextUtils.isEmpty(editRazaoSocial.getText().toString().trim())) {
-        editRazaoSocial.setError("Razão Social é obrigatória");
-        return false;
+        if (TextUtils.isEmpty(editRazaoSocial.getText().toString().trim())) {
+            editRazaoSocial.setError("Razão Social é obrigatória");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(editCnpj.getText().toString().trim())) {
+            editCnpj.setError("CNPJ é obrigatório");
+            return false;
+        } else if (!validarCnpj(editCnpj.getText().toString().trim())) {
+            editCnpj.setError("CNPJ inválido");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(editEndereco.getText().toString().trim())) {
+            editEndereco.setError("Endereço é obrigatório");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(editContato.getText().toString().trim())) {
+            editContato.setError("Contato é obrigatório");
+            return false;
+        } else if (!Patterns.PHONE.matcher(editContato.getText().toString().trim()).matches()) {
+            editContato.setError("Contato inválido");
+            return false;
+        }
+
+        return true;
     }
 
-    if (TextUtils.isEmpty(editCnpj.getText().toString().trim())) {
-        editCnpj.setError("CNPJ é obrigatório");
-        return false;
-    } else if (!validarCnpj(editCnpj.getText().toString().trim())) {
-        editCnpj.setError("CNPJ inválido");
-        return false;
-    }
-
-    if (TextUtils.isEmpty(editEndereco.getText().toString().trim())) {
-        editEndereco.setError("Endereço é obrigatório");
-        return false;
-    }
-
-    if (TextUtils.isEmpty(editContato.getText().toString().trim())) {
-        editContato.setError("Contato é obrigatório");
-        return false;
-    } else if (!Patterns.PHONE.matcher(editContato.getText().toString().trim()).matches()) {
-        editContato.setError("Contato inválido");
-        return false;
-    }
-
+    // Método para validar o CNPJ
     private boolean validarCnpj(String cnpj) {
-    if (cnpj.length() != 14) return false;
+        if (cnpj.length() != 14) return false;
 
-    try {
-        int[] peso1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-        int[] peso2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-        int soma = 0, digito1, digito2;
+        try {
+            int[] peso1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+            int[] peso2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+            int soma = 0, digito1, digito2;
 
-        for (int i = 0; i < 12; i++) {
-            soma += Character.getNumericValue(cnpj.charAt(i)) * peso1[i];
+            for (int i = 0; i < 12; i++) {
+                soma += Character.getNumericValue(cnpj.charAt(i)) * peso1[i];
+            }
+            digito1 = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+            soma = 0;
+            for (int i = 0; i < 12; i++) {
+                soma += Character.getNumericValue(cnpj.charAt(i)) * peso2[i];
+            }
+            soma += digito1 * peso2[12];
+            digito2 = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+            return cnpj.endsWith(digito1 + "" + digito2);
+        } catch (Exception e) {
+            return false; // Se algo falhar, considera inválido
         }
-        digito1 = soma % 11 < 2 ? 0 : 11 - soma % 11;
-
-        soma = 0;
-        for (int i = 0; i < 12; i++) {
-            soma += Character.getNumericValue(cnpj.charAt(i)) * peso2[i];
-        }
-        soma += digito1 * peso2[12];
-        digito2 = soma % 11 < 2 ? 0 : 11 - soma % 11;
-
-        return cnpj.endsWith(digito1 + "" + digito2);
-    } catch (Exception e) {
-        return false; // Se algo falhar, considera inválido
-    }
-}
-
-    return true; // Validação passou
     }
 
     // Método para salvar fornecedor no banco
     private void salvarFornecedor() {
-    String razaoSocial = editRazaoSocial.getText().toString().trim();
-    String cnpj = editCnpj.getText().toString().trim();
-    String endereco = editEndereco.getText().toString().trim();
-    String contato = editContato.getText().toString().trim();
+        String razaoSocial = editRazaoSocial.getText().toString().trim();
+        String cnpj = editCnpj.getText().toString().trim();
+        String endereco = editEndereco.getText().toString().trim();
+        String contato = editContato.getText().toString().trim();
 
-    boolean sucesso = databaseHelper.addFornecedor(razaoSocial, cnpj, endereco, contato);
+        boolean sucesso = databaseHelper.addFornecedor(razaoSocial, cnpj, endereco, contato);
 
-    if (sucesso) {
-        Toast.makeText(this, "Fornecedor salvo com sucesso!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(CadastroFornecedores.this, MenuComun.class);
-        startActivity(intent);
-        finish(); // Finaliza a atividade atual
-    } else {
-        Toast.makeText(this, "Erro ao salvar fornecedor.", Toast.LENGTH_SHORT).show();
-        Log.e("CadastroFornecedores", "Erro ao salvar fornecedor: " + razaoSocial);
+        if (sucesso) {
+            Toast.makeText(this, "Fornecedor salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(CadastroFornecedores.this, MenuComun.class);
+            startActivity(intent);
+            finish(); // Finaliza a atividade atual
+        } else {
+            Toast.makeText(this, "Erro ao salvar fornecedor.", Toast.LENGTH_SHORT).show();
+            Log.e("CadastroFornecedores", "Erro ao salvar fornecedor: " + razaoSocial);
+        }
     }
 }

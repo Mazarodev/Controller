@@ -1,62 +1,128 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
 
-    <!-- Botão de voltar -->
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_iconback"
-        android:contentDescription="Voltar"
-        android:layout_gravity="start"
-        android:onClick="onBackPressed"
-        tools:ignore="HardcodedText" />
+        <!-- Tela Inicial -->
+        <LinearLayout
+            android:id="@+id/layout_tela_inicial"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="374dp"
+            android:layout_height="358dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp">
 
-    <!-- Logo -->
-    <ImageView
-        android:layout_width="163dp"
-        android:layout_height="144dp"
-        android:layout_marginTop="6dp"
-        android:src="@drawable/your_logo"
-        tools:ignore="ContentDescription" />
+                <!-- Botão de voltar -->
 
-    <!-- Título -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CONTAGEM"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="37dp"
-        tools:ignore="HardcodedText" />
+                <!-- Logo -->
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/logo"
+                    android:layout_width="163dp"
+                    android:layout_height="144dp"
+                    android:layout_marginTop="6dp"
+                    android:contentDescription="Logo do aplicativo"
+                    android:src="@drawable/your_logo"
+                    tools:ignore="HardcodedText" />
 
+                <!-- Título -->
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="CONTAGEM"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
+                <!-- Ícone de código de barras -->
 
-    <!-- Icone do código de barras -->
-    <ImageView
+                <!-- Campo de entrada do código de barras -->
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="124dp"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="Ícone de escaneamento de código de barras"
+                    android:src="@drawable/ic_iconbarcodescan"
+                    tools:ignore="HardcodedText" />
 
-        android:layout_width="124dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_iconbarcodescan"
-        tools:ignore="ContentDescription" />
+                <EditText
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/edit_codigo_barras"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:autofillHints=""
+                    android:background="@drawable/botao_sair"
+                    android:gravity="center"
+                    android:hint="Digite ou escaneie o código de barras..."
+                    android:imeOptions="actionDone"
+                    android:padding="12dp"
+                    tools:ignore="HardcodedText,TextFields" />
+        </LinearLayout>
 
-    <!-- Campo de entrada do código de barras -->
-    <EditText
-        android:id="@+id/edit_codigo_barras"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite ou escaneie o código de barras..."
-        android:inputType="text"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/botao_sair"
-        android:padding="12dp"
-        tools:ignore="Autofill,HardcodedText" />
-</LinearLayout>
+        <!-- Tela Final -->
+        <LinearLayout
+            android:id="@+id/layout_tela_final"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Exibe informações do produto -->
+                <TextView
+                    android:id="@+id/texto_descricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="12dp"
+                    android:contentDescription="Descrição do produto"
+                    tools:ignore="HardcodedText" />
+
+                <!-- Campo de entrada para quantidade -->
+                <EditText
+                    android:id="@+id/edit_quantidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Insira a quantidade aqui..."
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    tools:ignore="HardcodedText" />
+
+                <!-- Botão de salvar -->
+                <Button
+                    android:id="@+id/botao_salvar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salvar"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="Botão para salvar o produto e a quantidade"
+                    tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/botao_voltar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start"
+            android:contentDescription="Voltar"
+            android:src="@drawable/ic_iconback"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="30dp"
+            tools:ignore="HardcodedText,MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

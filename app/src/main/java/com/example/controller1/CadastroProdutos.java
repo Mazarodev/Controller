@@ -7,13 +7,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CadastroProdutos extends AppCompatActivity {
 
     private EditText editDescricao, editCodigoBarra, editPreco, editFornecedor;
-    private Button btnSalvarUsuario;
     private DatabaseHelper dbHelper; // Declaração de DatabaseHelper
+
+    public CadastroProdutos(String descricao, String codigoBarras, double preco, String fornecedor) {
+        this.editDescricao = new EditText(this);
+        this.editDescricao.setText(descricao);
+        this.editCodigoBarra = new EditText(this);
+        this.editCodigoBarra.setText(codigoBarras);
+        this.editPreco = new EditText(this);
+        this.editPreco.setText(String.valueOf(preco));
+        this.editFornecedor = new EditText(this);
+        this.editFornecedor.setText(fornecedor);
+    }
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -29,7 +40,7 @@ public class CadastroProdutos extends AppCompatActivity {
         editCodigoBarra = findViewById(R.id.editCodigoBarra);
         editPreco = findViewById(R.id.editPreco);
         editFornecedor = findViewById(R.id.editFornecedor);
-        btnSalvarUsuario = findViewById(R.id.btnSalvarUsuario);
+        Button btnSalvarUsuario = findViewById(R.id.btnSalvarUsuario);
 
         // Configurando o clique do botão Salvar
         btnSalvarUsuario.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +65,9 @@ public class CadastroProdutos extends AppCompatActivity {
             return false;
         }
 
-        if (dbHelper.codigoBarraExiste(codigoBarra)) {
-        editCodigoBarra.setError("Código de barras já existe");
-        return false;
+        if (dbHelper.codigoBarraExiste(editCodigoBarra.getText().toString().trim())) {
+            editCodigoBarra.setError("Código de barras já existe");
+            return false;
         }
 
         String precoStr = editPreco.getText().toString().trim();
@@ -95,22 +106,35 @@ public class CadastroProdutos extends AppCompatActivity {
         int fornecedorId = dbHelper.getFornecedorIdByName(fornecedor);
         if (fornecedorId == -1) {
             Toast.makeText(this, "Fornecedor não encontrado!", Toast.LENGTH_SHORT).show();
-        return;
+            return;
         }
 
-        if (fornecedorId != -1) {
-            boolean sucesso = dbHelper.addProduto(descricao, codigoBarra, preco, (int) fornecedorId);
-            if (sucesso) {
-                Toast.makeText(this, "Produto cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                editDescricao.setText("");
-                editCodigoBarra.setText("");
-                editPreco.setText("");
-                editFornecedor.setText("");
-            } else {
-                Toast.makeText(this, "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();
-            }
+        boolean sucesso = dbHelper.addProduto(descricao, codigoBarra, preco, fornecedorId);
+        if (sucesso) {
+            Toast.makeText(this, "Produto cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+            editDescricao.setText("");
+            editCodigoBarra.setText("");
+            editPreco.setText("");
+            editFornecedor.setText("");
         } else {
-            Toast.makeText(this, "Erro ao cadastrar fornecedor", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Getters para obter os valores dos campos
+    public String getDescricao() {
+        return editDescricao != null ? editDescricao.getText().toString().trim() : null;
+    }
+
+    public String getCodigoBarras() {
+        return editCodigoBarra != null ? editCodigoBarra.getText().toString().trim() : null;
+    }
+
+    public String getPreco() {
+        return editPreco != null ? editPreco.getText().toString().trim() : null;
+    }
+
+    public String getFornecedor() {
+        return editFornecedor != null ? editFornecedor.getText().toString().trim() : null;
     }
 }
