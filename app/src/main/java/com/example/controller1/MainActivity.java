@@ -30,31 +30,44 @@ public class MainActivity extends AppCompatActivity {
         // Inicializar o banco de dados
         dbHelper = new DatabaseHelper(this);
 
-        // Configurar ação do botão de login
         btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = CampoEmail.getText().toString().trim();
-                String password = CampoSenha.getText().toString().trim();
-
-                if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Verificar se o usuário está registrado
-                    boolean loginValido = dbHelper.verificarLogin(email, password);
-
-                    if (loginValido) {
+        @Override
+        public void onClick(View v) {
+            String email = CampoEmail.getText().toString().trim();
+            String password = CampoSenha.getText().toString().trim();
+    
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+            } else {
+                // Verificar se o usuário está registrado
+                boolean loginValido = dbHelper.verificarLogin(email, password);
+    
+                if (loginValido) {
+                    // Obter o tipo de usuário
+                    String tipoUsuario = dbHelper.getTipoUsuario(email);
+    
+                    if (tipoUsuario != null) {
                         Toast.makeText(MainActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
-                        // Redirecionar para MenuComun após login bem-sucedido
-                        Intent intent = new Intent(MainActivity.this, MenuComun.class);
-                        startActivity(intent);
+    
+                        // Redirecionar com base no tipo de usuário
+                        if (tipoUsuario.equals("comum")) {
+                            Intent intent = new Intent(MainActivity.this, MenuComun.class);
+                            startActivity(intent);
+                        } else if (tipoUsuario.equals("administrador")) {
+                            Intent intent = new Intent(MainActivity.this, MenuAdministrador.class);
+                            startActivity(intent);
+                        }
                         finish(); // Fecha a tela de login
                     } else {
-                        Toast.makeText(MainActivity.this, "Usuário ou senha inválidos!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Erro ao obter tipo de usuário!", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(MainActivity.this, "Usuário ou senha inválidos!", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        }
+         });
+
 
         // Configurar links de esquecimento de senha e registro
         esqueceuSenhaLink.setOnClickListener(new View.OnClickListener() {
