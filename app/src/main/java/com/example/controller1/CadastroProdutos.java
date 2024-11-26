@@ -54,6 +54,11 @@ public class CadastroProdutos extends AppCompatActivity {
             return false;
         }
 
+        if (dbHelper.codigoBarraExiste(codigoBarra)) {
+        editCodigoBarra.setError("Código de barras já existe");
+        return false;
+        }
+
         String precoStr = editPreco.getText().toString().trim();
         if (TextUtils.isEmpty(precoStr)) {
             editPreco.setError("Preço é obrigatório");
@@ -87,12 +92,20 @@ public class CadastroProdutos extends AppCompatActivity {
         String fornecedor = editFornecedor.getText().toString().trim();
 
         // Você precisará obter o id do fornecedor baseado no nome ou adicioná-lo à tabela de fornecedores
-        long fornecedorId = dbHelper.addFornecedor(fornecedor); // Ajuste conforme o método em DatabaseHelper
+        int fornecedorId = dbHelper.getFornecedorIdByName(fornecedor);
+        if (fornecedorId == -1) {
+            Toast.makeText(this, "Fornecedor não encontrado!", Toast.LENGTH_SHORT).show();
+        return;
+        }
 
         if (fornecedorId != -1) {
             boolean sucesso = dbHelper.addProduto(descricao, codigoBarra, preco, (int) fornecedorId);
             if (sucesso) {
                 Toast.makeText(this, "Produto cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                editDescricao.setText("");
+                editCodigoBarra.setText("");
+                editPreco.setText("");
+                editFornecedor.setText("");
             } else {
                 Toast.makeText(this, "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();
             }
