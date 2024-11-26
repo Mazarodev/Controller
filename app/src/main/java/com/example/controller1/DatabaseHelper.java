@@ -161,6 +161,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return usuarioExiste; // Retorna true se o login for válido
     }
 
+    public int getFornecedorIdByName(String razaoSocial) {
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = db.query(TABLE_FORNECEDOR, new String[]{"id_fornecedor"},
+            "razao_social=?", new String[]{razaoSocial},
+            null, null, null);
+
+    int id = -1;
+    if (cursor.moveToFirst()) {
+        id = cursor.getInt(cursor.getColumnIndexOrThrow("id_fornecedor"));
+    }
+    cursor.close();
+    return id; // Retorna o ID ou -1 se não encontrado
+    }
+    
+    public boolean codigoBarraExiste(String codigoBarra) {
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = db.query(TABLE_PRODUTO, new String[]{"id_produto"},
+            "codigo_barra=?", new String[]{codigoBarra},
+            null, null, null);
+
+    boolean existe = cursor.getCount() > 0;
+    cursor.close();
+    return existe; // Retorna true se o código de barras já existir
+    }
+
+
     // Método para buscar todos os fornecedores
     public Cursor getAllFornecedores() {
         SQLiteDatabase db = this.getReadableDatabase();
