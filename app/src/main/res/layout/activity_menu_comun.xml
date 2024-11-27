@@ -59,6 +59,7 @@
             android:text="Cadastro de Produtos"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -92,6 +93,7 @@
             android:text="Cadastro de Fornecedores"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -124,7 +126,8 @@
             android:paddingBottom="8dp"
             android:text="Contagem"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -157,7 +160,8 @@
             android:paddingBottom="8dp"
             android:text="Gerar Relatório"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 

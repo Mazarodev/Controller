@@ -60,6 +60,7 @@
             android:textSize="16sp"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -89,9 +90,10 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="Cadastro de Fornecedores"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -124,6 +126,7 @@
             android:textSize="16sp"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -156,6 +159,7 @@
             android:textSize="16sp"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -188,6 +192,7 @@
             android:textSize="16sp"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -220,6 +225,7 @@
             android:text="Estoque"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 

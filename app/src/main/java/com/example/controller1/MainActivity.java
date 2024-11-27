@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         CampoEmail = findViewById(R.id.campoEmail);
         CampoSenha = findViewById(R.id.campoSenha);
         Button btLogin = findViewById(R.id.btLogin);
-        TextView esqueceuSenhaLink = findViewById(R.id.EsqueceuSenhaLink);
         TextView cadastroLink = findViewById(R.id.CadastroLink);
 
         // Inicializar o banco de dados
@@ -67,16 +66,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
          });
-
-
-        // Configurar links de esquecimento de senha e registro
-        esqueceuSenhaLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Ação para Esqueceu sua senha
-                Toast.makeText(MainActivity.this, "Esqueceu a senha?", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         cadastroLink.setOnClickListener(new View.OnClickListener() {
             @Override
