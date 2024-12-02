@@ -38,6 +38,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="11dp"
         android:onClick="openCadastroProdutos"
         tools:ignore="UseCompoundDrawables">
 
@@ -71,6 +72,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="11dp"
         android:onClick="openCadastroFornecedores"
         tools:ignore="UseCompoundDrawables">
 
@@ -104,6 +106,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="11dp"
         android:onClick="openCadastroUsuarios"
         tools:ignore="UseCompoundDrawables">
 
@@ -137,6 +140,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="11dp"
         android:onClick="openContagem"
         tools:ignore="UseCompoundDrawables">
 
@@ -170,6 +174,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="11dp"
         android:onClick="openRelatorio"
         tools:ignore="UseCompoundDrawables">
 
@@ -203,6 +208,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="11dp"
         android:onClick="openEstoque"
         tools:ignore="UseCompoundDrawables">
 
@@ -236,6 +242,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="32dp"
+        android:layout_marginRight="11dp"
         android:onClick="logout"
         tools:ignore="UseCompoundDrawables">
 
@@ -249,6 +256,7 @@
         <TextView
             android:background="@drawable/botao_sair"
             android:layout_width="90dp"
+            android:onClick="logout"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"

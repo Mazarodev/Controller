@@ -38,10 +38,12 @@
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
         android:onClick="openCadastroProdutos"
+        android:layout_marginRight="25dp"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="51dp"
+            android:layout_weight="3"
             android:layout_height="39dp"
             android:contentDescription="Cadastro de Produtos"
             android:src="@drawable/ic_add_product_icon"
@@ -49,7 +51,8 @@
 
         <TextView
             android:layout_width="243dp"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="46dp"
             android:background="@drawable/colors_botao"
             android:gravity="center_horizontal"
             android:paddingStart="16dp"
@@ -58,7 +61,7 @@
             android:paddingBottom="8dp"
             android:text="Cadastro de Produtos"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
@@ -70,6 +73,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="25dp"
         android:onClick="openCadastroFornecedores"
         tools:ignore="UseCompoundDrawables">
 
@@ -81,7 +85,7 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="243dp"
             android:layout_height="48dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/colors_botao"
@@ -104,6 +108,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="25dp"
         android:onClick="openContagem"
         tools:ignore="UseCompoundDrawables">
 
@@ -138,6 +143,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="25dp"
         android:onClick="openRelatorio"
         tools:ignore="UseCompoundDrawables">
 
@@ -172,6 +178,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="77dp"
+        android:layout_marginRight="25dp"
         android:onClick="logout"
         tools:ignore="UseCompoundDrawables">
 
@@ -182,21 +189,21 @@
             android:contentDescription="Sair"
             tools:ignore="HardcodedText" />
 
+        <TextView
+            android:layout_width="100dp"
+            android:onClick="logout"
+            android:layout_height="wrap_content"
+            android:background="@drawable/botao_sair"
+            android:gravity="center_horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:text="Sair"
+            android:textColor="#F44336"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
-        android:gravity="center_horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
-        android:text="Sair"
-        android:textColor="#F44336"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:ignore="HardcodedText" />
-
 </LinearLayout>

@@ -13,8 +13,10 @@ public class Relatorio extends AppCompatActivity {
     private TextView gerarTextView;
     private TextView dataTextView;
     private ImageView tabelaImageView;
+    private ImageView searchIcon;
+    private ImageView downloadIcon;
+    private ImageView backIcon;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,64 +27,39 @@ public class Relatorio extends AppCompatActivity {
         gerarTextView = findViewById(R.id.gerarTextView);
         dataTextView = findViewById(R.id.dataTextView);
         tabelaImageView = findViewById(R.id.tabelaImageView);
+        searchIcon = findViewById(R.id.ic_search);
+        downloadIcon = findViewById(R.id.ic_download_relatorio);
+        backIcon = findViewById(R.id.ic_iconback);
 
-        // Defina ações nos botões ou outros componentes, se necessário
+        // Configuração dos listeners
         setupListeners();
     }
 
     private void setupListeners() {
-        // Exemplo de listener para um dos ImageViews
-        findViewById(R.id.ic_search).setOnClickListener(new View.OnClickListener() {
+        // Listener para o botão de pesquisa
+        searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Ação para o botão de pesquisa
+                // Ação para pesquisa
+                // Exemplo: Toast.makeText(Relatorio.this, "Buscar relatório...", Toast.LENGTH_SHORT).show();
             }
         });
 
-        findViewById(R.id.ic_download_relatorio).setOnClickListener(new View.OnClickListener() {
+        // Listener para o botão de download
+        downloadIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Ação para o botão de download do relatório
+                // Ação para download do relatório
+                // Exemplo: Toast.makeText(Relatorio.this, "Baixando relatório...", Toast.LENGTH_SHORT).show();
             }
         });
 
-        findViewById(R.id.ic_iconback).setOnClickListener(new View.OnClickListener() {
+        // Listener para o botão de voltar
+        backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Ação para o botão de voltar
+                finish(); // Finaliza a atividade e volta para a anterior
             }
         });
-    }
-
-    public ImageView getLogoImageView() {
-        return logoImageView;
-    }
-
-    public void setLogoImageView(ImageView logoImageView) {
-        this.logoImageView = logoImageView;
-    }
-
-    public TextView getEstoqueTextView() {
-        return gerarTextView;
-    }
-
-    public void setEstoqueTextView(TextView estoqueTextView) {
-        this.gerarTextView = estoqueTextView;
-    }
-
-    public TextView getDataTextView() {
-        return dataTextView;
-    }
-
-    public void setDataTextView(TextView dataTextView) {
-        this.dataTextView = dataTextView;
-    }
-
-    public ImageView getTabelaImageView() {
-        return tabelaImageView;
-    }
-
-    public void setTabelaImageView(ImageView tabelaImageView) {
-        this.tabelaImageView = tabelaImageView;
     }
 }

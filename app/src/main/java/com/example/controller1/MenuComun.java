@@ -13,32 +13,37 @@ public class MenuComun extends AppCompatActivity {
         setContentView(R.layout.activity_menu_comun);
     }
 
+    // Método genérico para navegar para outra tela
+    private void navigateTo(Class<?> targetClass) {
+        Intent intent = new Intent(MenuComun.this, targetClass);
+        startActivity(intent);
+    }
+
     // Método para abrir a tela de Cadastro de Produtos
     public void openCadastroProdutos(View view) {
-        Intent intent = new Intent(MenuComun.this, CadastroProdutos.class);
-        startActivity(intent);
+        navigateTo(CadastroProdutos.class);
     }
 
     // Método para abrir a tela de Cadastro de Fornecedores
     public void openCadastroFornecedores(View view) {
-        Intent intent = new Intent(MenuComun.this, CadastroFornecedores.class);
-        startActivity(intent);
+        navigateTo(CadastroFornecedores.class);
     }
 
     // Método para abrir a tela de Contagem
     public void openContagem(View view) {
-        Intent intent = new Intent(MenuComun.this, Contagem.class);
-        startActivity(intent);
+        navigateTo(Contagem.class);
     }
 
     // Método para abrir a tela de Relatório
     public void openRelatorio(View view) {
-        Intent intent = new Intent(MenuComun.this, Relatorio.class);
-        startActivity(intent);
+        navigateTo(Relatorio.class);
     }
 
-    // Método para realizar logout
+    // Método para realizar logout com limpeza de sessão
     public void logout(View view) {
+        // Limpar dados de sessão
+        getSharedPreferences("user_session", MODE_PRIVATE).edit().clear().apply();
+
         Intent intent = new Intent(MenuComun.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

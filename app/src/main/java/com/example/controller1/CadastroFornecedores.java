@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CadastroFornecedores extends AppCompatActivity {
@@ -34,72 +33,70 @@ public class CadastroFornecedores extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         // Configurando o clique do botão Salvar
-        btnSalvarFornecedor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validarCampos()) {
-                    salvarFornecedor();
-                }
+        btnSalvarFornecedor.setOnClickListener(v -> {
+            if (validarCampos()) {
+                salvarFornecedor();
             }
         });
     }
 
+    public void voltar(View view) {
+        onBackPressed();
+    }
+
+
     // Método para validar os campos
     private boolean validarCampos() {
-        if (TextUtils.isEmpty(editRazaoSocial.getText().toString().trim())) {
-            editRazaoSocial.setError("Razão Social é obrigatória");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(editCnpj.getText().toString().trim())) {
-            editCnpj.setError("CNPJ é obrigatório");
-            return false;
-        } else if (!validarCnpj(editCnpj.getText().toString().trim())) {
+        if (isCampoVazio(editRazaoSocial, "Razão Social é obrigatória")) return false;
+        if (isCampoVazio(editCnpj, "CNPJ é obrigatório")) return false;
+        if (!validarCnpj(editCnpj.getText().toString().trim())) {
             editCnpj.setError("CNPJ inválido");
             return false;
         }
-
-        if (TextUtils.isEmpty(editEndereco.getText().toString().trim())) {
-            editEndereco.setError("Endereço é obrigatório");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(editContato.getText().toString().trim())) {
-            editContato.setError("Contato é obrigatório");
-            return false;
-        } else if (!Patterns.PHONE.matcher(editContato.getText().toString().trim()).matches()) {
+        if (isCampoVazio(editEndereco, "Endereço é obrigatório")) return false;
+        if (isCampoVazio(editContato, "Contato é obrigatório")) return false;
+        if (!Patterns.PHONE.matcher(editContato.getText().toString().trim()).matches()) {
             editContato.setError("Contato inválido");
             return false;
         }
-
         return true;
+    }
+
+    // Método auxiliar para verificar campos vazios
+    private boolean isCampoVazio(EditText campo, String mensagemErro) {
+        if (TextUtils.isEmpty(campo.getText().toString().trim())) {
+            campo.setError(mensagemErro);
+            return true;
+        }
+        return false;
     }
 
     // Método para validar o CNPJ
     private boolean validarCnpj(String cnpj) {
-        if (cnpj.length() != 14) return false;
+        if (!cnpj.matches("\\d{14}")) return false;
 
-        try {
-            int[] peso1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-            int[] peso2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-            int soma = 0, digito1, digito2;
+        int[] peso1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+        int[] peso2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
-            for (int i = 0; i < 12; i++) {
-                soma += Character.getNumericValue(cnpj.charAt(i)) * peso1[i];
-            }
-            digito1 = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        int soma1 = calcularSoma(cnpj, peso1, 12);
+        int digito1 = calcularDigito(soma1);
 
-            soma = 0;
-            for (int i = 0; i < 12; i++) {
-                soma += Character.getNumericValue(cnpj.charAt(i)) * peso2[i];
-            }
-            soma += digito1 * peso2[12];
-            digito2 = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        int soma2 = calcularSoma(cnpj, peso2, 12) + digito1 * peso2[12];
+        int digito2 = calcularDigito(soma2);
 
-            return cnpj.endsWith(digito1 + "" + digito2);
-        } catch (Exception e) {
-            return false; // Se algo falhar, considera inválido
+        return cnpj.endsWith(digito1 + "" + digito2);
+    }
+
+    private int calcularSoma(String cnpj, int[] pesos, int length) {
+        int soma = 0;
+        for (int i = 0; i < length; i++) {
+            soma += Character.getNumericValue(cnpj.charAt(i)) * pesos[i];
         }
+        return soma;
+    }
+
+    private int calcularDigito(int soma) {
+        return soma % 11 < 2 ? 0 : 11 - soma % 11;
     }
 
     // Método para salvar fornecedor no banco
@@ -113,9 +110,8 @@ public class CadastroFornecedores extends AppCompatActivity {
 
         if (sucesso) {
             Toast.makeText(this, "Fornecedor salvo com sucesso!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(CadastroFornecedores.this, MenuComun.class);
-            startActivity(intent);
-            finish(); // Finaliza a atividade atual
+            startActivity(new Intent(CadastroFornecedores.this, MenuComun.class));
+            finish();
         } else {
             Toast.makeText(this, "Erro ao salvar fornecedor.", Toast.LENGTH_SHORT).show();
             Log.e("CadastroFornecedores", "Erro ao salvar fornecedor: " + razaoSocial);

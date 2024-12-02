@@ -42,6 +42,11 @@ public class Contagem extends AppCompatActivity {
         });
     }
 
+    public void voltar(View view) {
+        onBackPressed();
+    }
+
+
     // Função para validar o código de barras no banco de dados
     private void validarCodigoBarras(String codigo) {
         // Simula uma consulta no banco de dados
@@ -61,7 +66,7 @@ public class Contagem extends AppCompatActivity {
         // Simule a consulta aqui
         // Exemplo de retorno de produto fictício
         if (codigo.equals("0745888745411")) {
-            return new CadastroProdutos("Amêndoas Laminadas 1kg", "0745888745411", 13.11, "NordsFoods LTDA");
+            return new CadastroProdutos();
         }
         return null; // Retorna null se não encontrar
     }
@@ -87,6 +92,7 @@ public class Contagem extends AppCompatActivity {
         layoutTelaInicial.setVisibility(View.GONE);
         layoutTelaFinal.setVisibility(View.VISIBLE);
     }
+
 
 }
 

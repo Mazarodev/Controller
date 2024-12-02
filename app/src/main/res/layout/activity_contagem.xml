@@ -116,6 +116,7 @@
 
         <ImageView
             android:id="@+id/botao_voltar"
+            android:onClick="voltar"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="start"
