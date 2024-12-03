@@ -36,15 +36,15 @@
         android:gravity="center"
         tools:ignore="HardcodedText" />
 
-    <ImageView
-        android:id="@+id/tabelaImageView"
-        android:layout_width="356dp"
-        android:layout_height="427dp"
-        android:layout_marginLeft="11dp"
-        android:background="@drawable/botao_sair"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_tabela"
-        tools:ignore="ContentDescription,RtlHardcoded" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProdutos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_produto" />
 
     <LinearLayout
         android:layout_width="match_parent"

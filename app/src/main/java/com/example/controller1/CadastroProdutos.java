@@ -25,7 +25,6 @@ public class CadastroProdutos extends AppCompatActivity {
         editFornecedor = findViewById(R.id.editFornecedor);
         Button btnSalvarProduto = findViewById(R.id.btnSalvarProduto);
 
-
         btnSalvarProduto.setOnClickListener(v -> {
             if (validarCampos()) {
                 salvarProduto();
@@ -74,37 +73,15 @@ public class CadastroProdutos extends AppCompatActivity {
         return true;
     }
 
-    public EditText getDescricao() {
-        return editDescricao;
-    }
-
-    public EditText getCodigoBarras() {
-        return editCodigoBarra;
-    }
-
-    public EditText getPreco() {
-        return editPreco;
-    }
-
-    public EditText getFornecedor() {
-        return editFornecedor;
-    }
-
-
     private void salvarProduto() {
         String descricao = editDescricao.getText().toString().trim();
-        String codigoBarra = editCodigoBarra.getText().toString().trim();
+        String codigoBarras = editCodigoBarra.getText().toString().trim();
         double preco = Double.parseDouble(editPreco.getText().toString().trim());
         String fornecedor = editFornecedor.getText().toString().trim();
 
-        int fornecedorId = dbHelper.getFornecedorIdByName(fornecedor);
+        Produto produto = new Produto(descricao, codigoBarras, preco, fornecedor);
 
-        if (fornecedorId == -1) {
-            Toast.makeText(this, "Fornecedor não encontrado!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        boolean sucesso = dbHelper.addProduto(descricao, codigoBarra, preco, fornecedorId);
+        boolean sucesso = dbHelper.addProduto(produto); // Passa o objeto Produto
         Toast.makeText(this, sucesso ? "Produto cadastrado com sucesso!" : "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();
     }
 }

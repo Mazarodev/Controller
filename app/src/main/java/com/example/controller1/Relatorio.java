@@ -1,65 +1,50 @@
 package com.example.controller1;
 
-import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Relatorio extends AppCompatActivity {
 
-    private ImageView logoImageView;
-    private TextView gerarTextView;
-    private TextView dataTextView;
-    private ImageView tabelaImageView;
-    private ImageView searchIcon;
-    private ImageView downloadIcon;
-    private ImageView backIcon;
+    private RecyclerView recyclerViewProdutos;
+    private ProdutoAdapter produtoAdapter;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
 
-        // Inicialização dos componentes da interface
-        logoImageView = findViewById(R.id.logoImageView);
-        gerarTextView = findViewById(R.id.gerarTextView);
-        dataTextView = findViewById(R.id.dataTextView);
-        tabelaImageView = findViewById(R.id.tabelaImageView);
-        searchIcon = findViewById(R.id.ic_search);
-        downloadIcon = findViewById(R.id.ic_download_relatorio);
-        backIcon = findViewById(R.id.ic_iconback);
+        recyclerViewProdutos = findViewById(R.id.recyclerViewProdutos);
+        recyclerViewProdutos.setLayoutManager(new LinearLayoutManager(this));
 
-        // Configuração dos listeners
-        setupListeners();
+        databaseHelper = new DatabaseHelper(this);
+
+        // Buscar dados do banco
+        List<Produto> produtoList = getProdutos();
+        produtoAdapter = new ProdutoAdapter(this, produtoList);
+        recyclerViewProdutos.setAdapter(produtoAdapter);
     }
 
-    private void setupListeners() {
-        // Listener para o botão de pesquisa
-        searchIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Ação para pesquisa
-                // Exemplo: Toast.makeText(Relatorio.this, "Buscar relatório...", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private List<Produto> getProdutos() {
+        List<Produto> produtos = new ArrayList<>();
+        Cursor cursor = databaseHelper.getAllProdutos();
 
-        // Listener para o botão de download
-        downloadIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Ação para download do relatório
-                // Exemplo: Toast.makeText(Relatorio.this, "Baixando relatório...", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
+                String codigoBarras = cursor.getString(cursor.getColumnIndexOrThrow("codigo_barras"));
+                double preco = cursor.getDouble(cursor.getColumnIndexOrThrow("preco"));
+                String fornecedor = cursor.getString(cursor.getColumnIndexOrThrow("fornecedor"));
 
-        // Listener para o botão de voltar
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // Finaliza a atividade e volta para a anterior
+                produtos.add(new Produto(descricao, codigoBarras, preco, fornecedor));
             }
-        });
+            cursor.close();
+        }
+        return produtos;
     }
 }

@@ -75,7 +75,7 @@ public class Contagem extends AppCompatActivity {
     private void mostrarTelaFinal(CadastroProdutos produto) {
         // Atualiza as informações do produto na tela final
         textoDescricao.setText(
-                "DESCRIÇÃO: " + produto.getDescricao() + "\n" +
+                        "DESCRIÇÃO: " + Produto.getDescricao() + "\n" +
                         "CÓDIGO DE BARRAS: " + produto.getCodigoBarras() + "\n" +
                         "PREÇO: R$" + produto.getPreco() + "\n" +
                         "FORNECEDOR: " + produto.getFornecedor()

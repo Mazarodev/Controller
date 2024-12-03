@@ -79,19 +79,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Método para adicionar um produto
-    public boolean addProduto(String descricao, String codigoBarra, double preco, int idFornecedor) {
-    SQLiteDatabase db = this.getWritableDatabase();
-    ContentValues values = new ContentValues();
-    values.put("descricao", descricao);
-    values.put("codigo_barra", codigoBarra);
-    values.put("preco", preco);
-    values.put("id_fornecedor", idFornecedor);
+    public boolean addProduto(Produto produto) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-    long result = db.insert(TABLE_PRODUTO, null, values);
-    db.close(); // Fechar o banco após a operação
-    return result != -1; // Retorna true se a inserção foi bem-sucedida
+        values.put("descricao", produto.getDescricao());
+        values.put("codigo_barras", produto.getCodigoBarras());
+        values.put("preco", produto.getPreco());
+        values.put("fornecedor", produto.getFornecedor()); // Ajuste para o nome da coluna correspondente
+
+        long result = db.insert("produtos", null, values);
+        return result != -1;
     }
-    
+
+
     // Método para adicionar um fornecedor
     public boolean addFornecedor(String razaoSocial, String cnpj, String endereco, String contato) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -202,6 +203,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     return tipoUsuario; // Retorna o tipo do usuário ou null se não encontrado
 }
 
+    // Método para buscar todos os produtos
+    public Cursor getAllProdutos() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM Produto", null);
+    }
 
     // Método para buscar todos os fornecedores
     public Cursor getAllFornecedores() {
