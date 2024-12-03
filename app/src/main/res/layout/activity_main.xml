@@ -14,8 +14,8 @@
     <!-- Título -->
     <ImageView
         android:id="@+id/logoImage"
-        android:layout_width="163dp"
-        android:layout_height="148dp"
+        android:layout_width="390dp"
+        android:layout_height="95dp"
         android:src="@drawable/your_logo"
         tools:ignore="ContentDescription" />
 
@@ -45,6 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint=" E-mail"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:inputType="textEmailAddress"
         android:drawableLeft="@drawable/ic_email"
         android:layout_marginTop="11dp"
@@ -58,6 +60,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/botao_sair"
         android:hint=" Senha"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:inputType="textPassword"
         android:drawableLeft="@drawable/ic_password"
         android:layout_marginTop="15dp"

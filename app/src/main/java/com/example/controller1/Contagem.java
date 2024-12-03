@@ -1,98 +1,102 @@
 package com.example.controller1;
 
-import android.annotation.SuppressLint;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class Contagem extends AppCompatActivity {
 
+    private static final int CAMERA_REQUEST_CODE = 1001;
+
     private LinearLayout layoutTelaInicial;
     private LinearLayout layoutTelaFinal;
-    private TextView textoDescricao; // Para exibir a descrição do produto
+    private TextView textoDescricao;
+    private EditText editCodigoBarras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contagem);
 
-        // Referências para os layouts e componentes
         layoutTelaInicial = findViewById(R.id.layout_tela_inicial);
         layoutTelaFinal = findViewById(R.id.layout_tela_final);
         textoDescricao = findViewById(R.id.texto_descricao);
-        EditText editCodigoBarras = findViewById(R.id.edit_codigo_barras);
+        editCodigoBarras = findViewById(R.id.edit_codigo_barras);
+        Button botaoEscanear = findViewById(R.id.botao_escanear);
 
-        // Configura listener para leitura do código de barras
-        editCodigoBarras.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    String codigo = editCodigoBarras.getText().toString();
-                    validarCodigoBarras(codigo);
-                    return true;
-                }
-                return false;
+        // Configura listener para o botão de escanear
+        botaoEscanear.setOnClickListener(v -> verificarPermissaoCamera());
+    }
+
+    private void verificarPermissaoCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+        } else {
+            abrirCamera();
+        }
+    }
+
+    private void abrirCamera() {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivityForResult(intent, CAMERA_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            String codigoBarras = data.getStringExtra("codigo_barras");
+            if (codigoBarras != null) {
+                editCodigoBarras.setText(codigoBarras);
+                validarCodigoBarras(codigoBarras);
             }
-        });
+        }
     }
 
     public void voltar(View view) {
         onBackPressed();
     }
 
-
-    // Função para validar o código de barras no banco de dados
     private void validarCodigoBarras(String codigo) {
-        // Simula uma consulta no banco de dados
         CadastroProdutos produto = consultaProdutoNoBanco(codigo);
 
         if (produto != null) {
-            // Produto encontrado: exibe a tela final com os detalhes
             mostrarTelaFinal(produto);
         } else {
-            // Produto não encontrado: exibe mensagem ou ação
             exibirOpcaoNovoProduto();
         }
     }
 
-    // Exemplo de consulta no banco de dados (dummy)
     private CadastroProdutos consultaProdutoNoBanco(String codigo) {
-        // Simule a consulta aqui
-        // Exemplo de retorno de produto fictício
         if (codigo.equals("0745888745411")) {
             return new CadastroProdutos();
         }
-        return null; // Retorna null se não encontrar
+        return null;
     }
 
-    @SuppressLint("SetTextI18n")
     private void mostrarTelaFinal(CadastroProdutos produto) {
-        // Atualiza as informações do produto na tela final
-        textoDescricao.setText(
-                        "DESCRIÇÃO: " + Produto.getDescricao() + "\n" +
-                        "CÓDIGO DE BARRAS: " + produto.getCodigoBarras() + "\n" +
-                        "PREÇO: R$" + produto.getPreco() + "\n" +
-                        "FORNECEDOR: " + produto.getFornecedor()
-        );
 
-        // Troca as telas
-        layoutTelaInicial.setVisibility(View.GONE); // Esconde a tela inicial
-        layoutTelaFinal.setVisibility(View.VISIBLE); // Exibe a tela final
-    }
-
-    private void exibirOpcaoNovoProduto() {
-        // Implementa lógica para produtos não encontrados (exibir mensagem ou ação)
-        textoDescricao.setText("Produto não encontrado! Deseja cadastrar?");
         layoutTelaInicial.setVisibility(View.GONE);
         layoutTelaFinal.setVisibility(View.VISIBLE);
     }
 
-
+    private void exibirOpcaoNovoProduto() {
+        textoDescricao.setText("Produto não encontrado! Deseja cadastrar?");
+        layoutTelaInicial.setVisibility(View.GONE);
+        layoutTelaFinal.setVisibility(View.VISIBLE);
+    }
 }
 

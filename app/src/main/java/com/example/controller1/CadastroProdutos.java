@@ -79,6 +79,7 @@ public class CadastroProdutos extends AppCompatActivity {
         double preco = Double.parseDouble(editPreco.getText().toString().trim());
         String fornecedor = editFornecedor.getText().toString().trim();
 
+
         Produto produto = new Produto(descricao, codigoBarras, preco, fornecedor);
 
         boolean sucesso = dbHelper.addProduto(produto); // Passa o objeto Produto
