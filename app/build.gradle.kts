@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -33,6 +34,7 @@ android {
 
 dependencies {
 
+    implementation 'com.google.mlkit:barcode-scanning:18.2.0'
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
