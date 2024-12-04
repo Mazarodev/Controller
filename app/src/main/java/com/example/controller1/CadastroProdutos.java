@@ -1,14 +1,22 @@
 package com.example.controller1;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class CadastroProdutos extends AppCompatActivity {
+
+    private static final int CAMERA_REQUEST_CODE = 1001;
 
     private EditText editDescricao, editCodigoBarra, editPreco, editFornecedor;
     private DatabaseHelper dbHelper;
@@ -25,16 +33,47 @@ public class CadastroProdutos extends AppCompatActivity {
         editPreco = findViewById(R.id.editPreco);
         editFornecedor = findViewById(R.id.editFornecedor);
         Button btnSalvarProduto = findViewById(R.id.btnSalvarProduto);
+        Button botaoEscanear = findViewById(R.id.botao_escanear); // Novo botão de escaneamento
 
         btnSalvarProduto.setOnClickListener(v -> {
             if (validarCampos()) {
                 salvarProduto();
             }
         });
+
+        // Configura o botão de escaneamento para abrir a câmera
+        botaoEscanear.setOnClickListener(v -> verificarPermissaoCamera());
     }
 
     public void voltar(View view) {
         onBackPressed();
+    }
+
+    private void verificarPermissaoCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+        } else {
+            abrirCamera();
+        }
+    }
+
+    private void abrirCamera() {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivityForResult(intent, CAMERA_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            String codigoBarras = data.getStringExtra("codigo_barras");
+            if (codigoBarras != null) {
+                editCodigoBarra.setText(codigoBarras); // Define o valor diretamente no campo
+            }
+        }
     }
 
     private boolean validarCampos() {
@@ -84,10 +123,9 @@ public class CadastroProdutos extends AppCompatActivity {
         double preco = Double.parseDouble(editPreco.getText().toString().trim());
         String fornecedor = editFornecedor.getText().toString().trim();
 
-
         Produto produto = new Produto(descricao, codigoBarras, preco, fornecedor);
 
-        boolean sucesso = dbHelper.addProduto(produto); // Passa o objeto Produto
+        boolean sucesso = dbHelper.addProduto(produto);
         Toast.makeText(this, sucesso ? "Produto cadastrado com sucesso!" : "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();
     }
 }

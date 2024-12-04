@@ -40,6 +40,8 @@ public class Contagem extends AppCompatActivity {
         Button botaoSalvar = findViewById(R.id.botao_salvar);
         botaoSalvar.setOnClickListener(v -> salvarNovoProduto());
 
+
+
     }
 
     private void verificarPermissaoCamera() {
