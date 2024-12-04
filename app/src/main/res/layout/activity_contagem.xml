@@ -47,8 +47,6 @@
                     tools:ignore="HardcodedText" />
 
                 <!-- Ícone de código de barras -->
-
-                <!-- Campo de entrada do código de barras -->
                 <ImageView
                     android:layout_gravity="center"
                     android:layout_width="124dp"
@@ -58,6 +56,7 @@
                     android:src="@drawable/ic_iconbarcodescan"
                     tools:ignore="HardcodedText" />
 
+                <!-- Campo de entrada do código de barras -->
                 <Button
                     android:id="@+id/botao_escanear"
                     android:layout_width="wrap_content"

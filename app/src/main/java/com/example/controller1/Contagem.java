@@ -36,6 +36,10 @@ public class Contagem extends AppCompatActivity {
 
         // Configura listener para o botão de escanear
         botaoEscanear.setOnClickListener(v -> verificarPermissaoCamera());
+
+        Button botaoSalvar = findViewById(R.id.botao_salvar);
+        botaoSalvar.setOnClickListener(v -> salvarNovoProduto());
+
     }
 
     private void verificarPermissaoCamera() {
@@ -98,5 +102,40 @@ public class Contagem extends AppCompatActivity {
         layoutTelaInicial.setVisibility(View.GONE);
         layoutTelaFinal.setVisibility(View.VISIBLE);
     }
+
+    private void salvarNovoProduto() {
+        EditText editQuantidade = findViewById(R.id.edit_quantidade); // Campo de quantidade
+        String quantidadeStr = editQuantidade.getText().toString();
+        String codigoBarras = editCodigoBarras.getText().toString();
+
+        if (quantidadeStr.isEmpty()) {
+            editQuantidade.setError("Quantidade obrigatória!");
+            return;
+        }
+
+        int quantidade = Integer.parseInt(quantidadeStr);
+
+        // Simulação de dados básicos do produto (pode adicionar mais campos)
+        String descricaoProduto = "Produto Novo"; // Você pode solicitar uma descrição ao usuário
+        double preco = 0.0; // Preço padrão ou fornecido pelo usuário
+
+        // Salvando no banco de dados
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        String fornecedor = "";
+        Produto novoProduto = new Produto(descricaoProduto, codigoBarras, preco, fornecedor);
+
+        boolean sucesso = dbHelper.addProduto(novoProduto);
+        if (sucesso) {
+            textoDescricao.setText("Produto salvo com sucesso!");
+            editQuantidade.setText(""); // Limpa o campo
+        } else {
+            textoDescricao.setText("Erro ao salvar produto.");
+        }
+
+        // Opcional: voltar para a tela inicial ou encerrar a atividade
+        layoutTelaFinal.setVisibility(View.GONE);
+        layoutTelaInicial.setVisibility(View.VISIBLE);
+    }
+
 }
 
