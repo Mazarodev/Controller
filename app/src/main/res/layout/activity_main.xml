@@ -6,19 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#D3D3D3"
+    android:background="#e0f7db"
     android:padding="16dp">
 
     <!-- Logo -->
-
-    <!-- Título -->
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="390dp"
         android:layout_height="95dp"
-        android:src="@drawable/your_logo"
+        android:src="@drawable/ic_logo"
         tools:ignore="ContentDescription" />
 
+    <!-- Título -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +40,7 @@
     <!-- Campo de e-mail -->
     <EditText
         android:id="@+id/campoEmail"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint=" E-mail"
@@ -58,7 +57,7 @@
         android:id="@+id/campoSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
         android:hint=" Senha"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -103,7 +102,7 @@
             android:layout_height="wrap_content"
             android:text="Não possui conta? Registre-se"
             android:textColor="#FF6347"
-            android:textSize="14sp"
+            android:textSize="17sp"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 

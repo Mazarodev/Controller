@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#e0f7db"
     android:padding="16dp">
 
         <!-- Tela Inicial -->
@@ -29,7 +30,7 @@
                     android:layout_height="95dp"
                     android:layout_marginTop="6dp"
                     android:contentDescription="Logo do aplicativo"
-                    android:src="@drawable/your_logo"
+                    android:src="@drawable/ic_logo"
                     tools:ignore="HardcodedText" />
 
                 <!-- Título -->
@@ -42,6 +43,7 @@
                     android:text="CONTAGEM"
                     android:textSize="24sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <!-- Ícone de código de barras -->
@@ -69,12 +71,15 @@
                 <EditText
                     android:layout_marginTop="15dp"
                     android:id="@+id/edit_codigo_barras"
-                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_width="350dp"
                     android:layout_height="49dp"
                     android:autofillHints=""
-                    android:background="@drawable/botao_sair"
+                    android:background="@drawable/text_box"
                     android:gravity="center"
                     android:hint="Digite ou escaneie o código de barras..."
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:imeOptions="actionDone"
                     android:padding="12dp"
                     tools:ignore="HardcodedText,TextFields" />

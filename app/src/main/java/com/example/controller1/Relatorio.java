@@ -2,6 +2,8 @@ package com.example.controller1;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +30,10 @@ public class Relatorio extends AppCompatActivity {
         List<Produto> produtoList = getProdutos();
         produtoAdapter = new ProdutoAdapter(this, produtoList);
         recyclerViewProdutos.setAdapter(produtoAdapter);
+    }
+
+    public void voltar(View view) {
+        onBackPressed();
     }
 
     private List<Produto> getProdutos() {

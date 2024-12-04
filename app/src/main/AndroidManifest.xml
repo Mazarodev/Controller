@@ -41,6 +41,7 @@
         <activity
             android:name=".CadastroFornecedores"
             android:exported="false" />
+        <activity android:name=".CameraActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

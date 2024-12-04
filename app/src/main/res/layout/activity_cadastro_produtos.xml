@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="#e0f7db"
     android:gravity="center_horizontal">
 
     <!-- Botão de voltar -->
@@ -26,6 +27,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColor="@color/black"
         android:layout_marginTop="19dp"
         tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
@@ -37,14 +39,16 @@
         android:text="Descrição:"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/editDescricao"
         android:hint="..."
+        android:textColorHint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
         android:padding="12dp"
         android:inputType="textPersonName"
         tools:ignore="HardcodedText,LabelFor" />
@@ -56,15 +60,17 @@
         android:text="Código:"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/editCodigoBarra"
         android:hint="Código de barra..."
+        android:textColorHint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
         android:padding="12dp"
         android:inputType="textEmailAddress"
         tools:ignore="HardcodedText,LabelFor" />
@@ -77,13 +83,15 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
+        android:textColor="@color/black"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/editPreco"
         android:hint="..."
+        android:textColorHint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
         android:padding="12dp"
         android:inputType="textPassword"
         tools:ignore="Autofill,HardcodedText,LabelFor" />
@@ -95,14 +103,16 @@
         android:text="Fornecedor:"
         android:textStyle="bold"
         android:textSize="20dp"
+        android:textColor="@color/black"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/editFornecedor"
         android:hint="..."
+        android:textColorHint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
         android:padding="12dp"
         android:inputType="textPassword"
         tools:ignore="Autofill,HardcodedText,LabelFor" />
@@ -122,10 +132,10 @@
 
     <!-- Logo -->
     <ImageView
-        android:layout_width="142dp"
-        android:layout_height="118dp"
+        android:layout_width="390dp"
+        android:layout_height="95dp"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
-        android:src="@drawable/your_logo"
+        android:src="@drawable/ic_logo"
         tools:ignore="ContentDescription" />
 </LinearLayout>

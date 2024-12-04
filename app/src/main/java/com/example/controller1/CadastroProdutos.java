@@ -2,6 +2,7 @@ package com.example.controller1;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,6 +31,10 @@ public class CadastroProdutos extends AppCompatActivity {
                 salvarProduto();
             }
         });
+    }
+
+    public void voltar(View view) {
+        onBackPressed();
     }
 
     private boolean validarCampos() {

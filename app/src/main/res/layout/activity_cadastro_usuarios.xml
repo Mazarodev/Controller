@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="#e0f7db"
     android:gravity="center_horizontal">
 
     <!-- Botão de voltar -->
@@ -26,22 +27,26 @@
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginTop="30dp"
+        android:textColor="@color/black"
         tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
 
     <!-- Campo Nome -->
     <TextView
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nome:"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_Nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
+        android:hint="..."
+        android:textColorHint="@color/black"
         android:padding="12dp"
         android:inputType="textPersonName"
         tools:ignore="Autofill,HardcodedText,LabelFor" />
@@ -53,13 +58,16 @@
         android:text="E-mail:"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginTop="8dp"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
+        android:hint="..."
+        android:textColorHint="@color/black"
         android:padding="12dp"
         android:inputType="textEmailAddress"
         tools:ignore="Autofill,LabelFor" />
@@ -72,12 +80,15 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
+        android:textColor="@color/black"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_Senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
+        android:hint="..."
+        android:textColorHint="@color/black"
         android:padding="12dp"
         android:inputType="textPassword"
         tools:ignore="Autofill,LabelFor" />
@@ -90,13 +101,16 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/black"
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_ConfirmarSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/botao_sair"
+        android:background="@drawable/text_box"
         android:padding="12dp"
+        android:hint="..."
+        android:textColorHint="@color/black"
         android:inputType="textPassword"
         tools:ignore="Autofill,LabelFor" />
 
@@ -106,6 +120,8 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="23dp"
+        android:hint="..."
+
         android:backgroundTint="@color/black"
         android:text="Salvar"
         android:textColor="@color/white"
@@ -115,11 +131,11 @@
 
     <!-- Logo -->
     <ImageView
-        android:layout_width="148dp"
-        android:layout_height="127dp"
+        android:layout_width="390dp"
+        android:layout_height="95dp"
         android:layout_gravity="center"
-        android:layout_marginTop="49dp"
-        android:src="@drawable/your_logo"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_logo"
         tools:ignore="ContentDescription" />
 
 </LinearLayout>
