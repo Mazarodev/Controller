@@ -17,7 +17,6 @@ public class CadastroFornecedores extends AppCompatActivity {
     private EditText editRazaoSocial, editCnpj, editEndereco, editContato;
     private DatabaseHelper databaseHelper;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

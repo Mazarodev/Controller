@@ -89,10 +89,6 @@ public class CadastroProdutos extends AppCompatActivity {
             return false;
         }
 
-        if (dbHelper.codigoBarraExiste(editCodigoBarra.getText().toString().trim())) {
-            editCodigoBarra.setError("Código de barras já existe");
-            return false;
-        }
 
         String precoStr = editPreco.getText().toString().trim();
         if (TextUtils.isEmpty(precoStr)) {

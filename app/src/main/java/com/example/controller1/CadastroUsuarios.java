@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,6 +33,10 @@ public class CadastroUsuarios extends AppCompatActivity {
 
         // Configurando o clique do botão de salvar
         btnSalvar.setOnClickListener(v -> salvarUsuario());
+    }
+
+    public void voltar(View view) {
+        onBackPressed();
     }
 
     private void salvarUsuario() {

@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "BancoController.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2; // Versão atualizada
 
     // Tabelas
     private static final String TABLE_FORNECEDOR = "Fornecedor";
@@ -53,20 +53,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_USUARIO + " (" +
                 "id_usuario INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "nome TEXT," +
-                "email TEXT UNIQUE," + // Adicionado UNIQUE para evitar duplicatas
+                "email TEXT UNIQUE," +
                 "senha TEXT," +
                 "tipo_usuario TEXT NOT NULL CHECK(tipo_usuario IN ('comum', 'administrador')))");
 
+        // Tabela Contagem (Caso exista)
+        db.execSQL("CREATE TABLE " + TABLE_CONTAGEM + " (" +
+                "id_contagem INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "id_produto INTEGER," +
+                "quantidade INTEGER," +
+                "data_contagem DATETIME," +
+                "FOREIGN KEY(id_produto) REFERENCES " + TABLE_PRODUTO + "(id_produto))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FORNECEDOR);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUTO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ESTOQUE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTAGEM);
-        onCreate(db);
+        // Em vez de apagar todas as tabelas, apenas faça a atualização da estrutura necessária
+        // Exemplo de alteração (adicionar uma coluna):
+        if (oldVersion < 2) {
+            // Supondo que você adicionou uma nova coluna
+            db.execSQL("ALTER TABLE " + TABLE_USUARIO + " ADD COLUMN novoCampo TEXT");
+        }
+
+        // Adicione mais lógica para outros upgrades necessários
+    }
+        // O exemplo acima pode ser expandido com mais verificações de versões caso você adicione mais versões no futuro.
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onDowngrade(db, oldVersion, newVersion);  // Caso você precise tratar downgrade (não é recomendado)
     }
 
     // Método para adicionar um produto
@@ -83,7 +98,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert("produtos", null, values);
         return result != -1;
     }
-
 
     // Método para adicionar um fornecedor
     public boolean addFornecedor(String razaoSocial, String cnpj, String endereco, String contato) {
@@ -123,23 +137,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean verificarEmailExiste(String email) {
-    SQLiteDatabase db = this.getReadableDatabase();
-    Cursor cursor = null;
-    boolean existe = false;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        boolean existe = false;
 
-    try {
-        cursor = db.query(TABLE_USUARIO, new String[]{"id_usuario"},
-                "email=?", new String[]{email},
-                null, null, null);
-        existe = cursor.getCount() > 0;
-    } finally {
-        if (cursor != null) cursor.close();
-        db.close();
-    }
+        try {
+            cursor = db.query(TABLE_USUARIO, new String[]{"id_usuario"},
+                    "email=?", new String[]{email},
+                    null, null, null);
+            existe = cursor.getCount() > 0;
+        } finally {
+            if (cursor != null) cursor.close();
+            db.close();
+        }
 
-    return existe;
+        return existe;
     }
-    
 
     public boolean verificarLogin(String email, String senha) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -154,46 +167,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return usuarioExiste; // Retorna true se o login for válido
     }
 
-    public int getFornecedorIdByName(String razaoSocial) {
-    SQLiteDatabase db = this.getReadableDatabase();
-    Cursor cursor = db.query(TABLE_FORNECEDOR, new String[]{"id_fornecedor"},
-            "razao_social=?", new String[]{razaoSocial},
-            null, null, null);
-
-    int id = -1;
-    if (cursor.moveToFirst()) {
-        id = cursor.getInt(cursor.getColumnIndexOrThrow("id_fornecedor"));
-    }
-    cursor.close();
-    return id; // Retorna o ID ou -1 se não encontrado
-    }
-
-    // Método de verificação de código de barra
-    public boolean codigoBarraExiste(String codigoBarra) {
-    SQLiteDatabase db = this.getReadableDatabase();
-    Cursor cursor = db.query(TABLE_PRODUTO, new String[]{"id_produto"},
-            "codigo_barra=?", new String[]{codigoBarra},
-            null, null, null);
-
-    boolean existe = cursor.getCount() > 0;
-    cursor.close();
-    return existe; // Retorna true se o código de barras já existir
-    }
-
-    // Método para verificar o tipo do usuário através do email
     public String getTipoUsuario(String email) {
-    SQLiteDatabase db = this.getReadableDatabase();
-    Cursor cursor = db.query(TABLE_USUARIO, new String[]{"tipo_usuario"},
-            "email=?", new String[]{email},
-            null, null, null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USUARIO, new String[]{"tipo_usuario"},
+                "email=?", new String[]{email},
+                null, null, null);
 
-    String tipoUsuario = null;
-    if (cursor.moveToFirst()) {
-        tipoUsuario = cursor.getString(cursor.getColumnIndexOrThrow("tipo_usuario"));
+        String tipoUsuario = null;
+        if (cursor.moveToFirst()) {
+            tipoUsuario = cursor.getString(cursor.getColumnIndexOrThrow("tipo_usuario"));
+        }
+        cursor.close();
+        return tipoUsuario; // Retorna o tipo do usuário ou null se não encontrado
     }
-    cursor.close();
-    return tipoUsuario; // Retorna o tipo do usuário ou null se não encontrado
-}
 
     // Método para buscar todos os produtos
     public Cursor getAllProdutos() {
