@@ -49,7 +49,8 @@
         tools:ignore="ContentDescription,RtlHardcoded" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
+        android:layout_gravity="center"
         android:layout_height="64dp"
         android:background="@drawable/colors_botao"
         android:orientation="horizontal"
@@ -67,7 +68,7 @@
             android:id="@+id/ic_download_relatorio"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:layout_marginRight="108dp"
+            android:layout_marginRight="95dp"
             android:src="@drawable/ic_download_relatorio"
             tools:ignore="ContentDescription,RtlHardcoded" />
 
@@ -75,6 +76,7 @@
             android:id="@+id/ic_iconback"
             android:layout_width="44dp"
             android:layout_height="44dp"
+            android:onClick="voltar"
             android:src="@drawable/ic_iconback"
             tools:ignore="ContentDescription" />
     </LinearLayout>
