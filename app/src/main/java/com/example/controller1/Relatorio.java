@@ -26,7 +26,6 @@ public class Relatorio extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-        // Buscar dados do banco
         List<Produto> produtoList = getProdutos();
         produtoAdapter = new ProdutoAdapter(this, produtoList);
         recyclerViewProdutos.setAdapter(produtoAdapter);
@@ -41,17 +40,21 @@ public class Relatorio extends AppCompatActivity {
         Cursor cursor = databaseHelper.getAllProdutos();
 
         if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
-                String codigoBarras = cursor.getString(cursor.getColumnIndexOrThrow("codigo_barras"));
-                double preco = cursor.getDouble(cursor.getColumnIndexOrThrow("preco"));
-                String fornecedor = cursor.getString(cursor.getColumnIndexOrThrow("fornecedor"));
-                String quantidade = cursor.getString(cursor.getColumnIndexOrThrow("quantidade"));
+            try {
+                while (cursor.moveToNext()) {
+                    String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
+                    String codigoBarras = cursor.getString(cursor.getColumnIndexOrThrow("codigo_barras"));
+                    double preco = cursor.getDouble(cursor.getColumnIndexOrThrow("preco"));
+                    String fornecedor = cursor.getString(cursor.getColumnIndexOrThrow("fornecedor"));
+                    String quantidade = cursor.getString(cursor.getColumnIndexOrThrow("quantidade"));
 
-                produtos.add(new Produto(descricao, codigoBarras, preco, fornecedor, quantidade));
+                    produtos.add(new Produto(descricao, codigoBarras, preco, fornecedor, quantidade));
+                }
+            } finally {
+                cursor.close();
             }
-            cursor.close();
         }
         return produtos;
     }
 }
+

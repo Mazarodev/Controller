@@ -112,14 +112,14 @@ public class CadastroProdutos extends AppCompatActivity {
         }
 
         String quantidadeStr = editQuantidade.getText().toString().trim();
-        if (TextUtils.isEmpty(precoStr)) {
+        if (TextUtils.isEmpty(quantidadeStr)) {
             editQuantidade.setError("Quantidade é obrigatório");
             return false;
         }
 
         try {
-            double preco = Double.parseDouble(precoStr);
-            if (preco <= 0) {
+            double quantidade = Double.parseDouble(quantidadeStr);
+            if (quantidade <= 0) {
                 editQuantidade.setError("Quantidade deve ser positivo");
                 return false;
             }
