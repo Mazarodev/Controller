@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class Relatorio extends AppCompatActivity {
             try {
                 while (cursor.moveToNext()) {
                     String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
-                    String codigoBarras = cursor.getString(cursor.getColumnIndexOrThrow("codigo_barras"));
+                    String codigoBarras = cursor.getString(cursor.getColumnIndexOrThrow("codigo_barra"));  // Corrigido para codigo_barra
                     double preco = cursor.getDouble(cursor.getColumnIndexOrThrow("preco"));
-                    String fornecedor = cursor.getString(cursor.getColumnIndexOrThrow("fornecedor"));
+                    String fornecedor = getFornecedorById(cursor.getInt(cursor.getColumnIndexOrThrow("id_fornecedor"))); // Obter fornecedor pelo ID
                     String quantidade = cursor.getString(cursor.getColumnIndexOrThrow("quantidade"));
 
                     produtos.add(new Produto(descricao, codigoBarras, preco, fornecedor, quantidade));
@@ -56,5 +57,19 @@ public class Relatorio extends AppCompatActivity {
         }
         return produtos;
     }
-}
 
+    // Método para obter o nome do fornecedor com base no ID
+    private String getFornecedorById(int fornecedorId) {
+        Cursor cursor = databaseHelper.getFornecedorById(fornecedorId);
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    return cursor.getString(cursor.getColumnIndexOrThrow("razao_social"));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        return "Fornecedor desconhecido"; // Caso o fornecedor não seja encontrado
+    }
+}

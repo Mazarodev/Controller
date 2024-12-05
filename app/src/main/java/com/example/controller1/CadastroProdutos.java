@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +18,6 @@ import androidx.core.content.ContextCompat;
 public class CadastroProdutos extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST_CODE = 1001;
-
     private EditText editDescricao, editCodigoBarra, editPreco, editFornecedor, editQuantidade;
     private DatabaseHelper dbHelper;
 
@@ -43,7 +43,6 @@ public class CadastroProdutos extends AppCompatActivity {
             }
         });
 
-        // Configura o botão de escaneamento para abrir a câmera
         botaoEscanear.setOnClickListener(v -> verificarPermissaoCamera());
     }
 
@@ -73,7 +72,7 @@ public class CadastroProdutos extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
             String codigoBarras = data.getStringExtra("codigo_barras");
             if (codigoBarras != null) {
-                editCodigoBarra.setText(codigoBarras); // Define o valor diretamente no campo
+                editCodigoBarra.setText(codigoBarras);
             }
         }
     }
@@ -88,7 +87,6 @@ public class CadastroProdutos extends AppCompatActivity {
             editCodigoBarra.setError("Código de barras é obrigatório");
             return false;
         }
-
 
         String precoStr = editPreco.getText().toString().trim();
         if (TextUtils.isEmpty(precoStr)) {
@@ -109,18 +107,18 @@ public class CadastroProdutos extends AppCompatActivity {
 
         String quantidadeStr = editQuantidade.getText().toString().trim();
         if (TextUtils.isEmpty(quantidadeStr)) {
-            editQuantidade.setError("Quantidade é obrigatório");
+            editQuantidade.setError("Quantidade é obrigatória");
             return false;
         }
 
         try {
             double quantidade = Double.parseDouble(quantidadeStr);
             if (quantidade <= 0) {
-                editQuantidade.setError("Quantidade deve ser positivo");
+                editQuantidade.setError("Quantidade deve ser positiva");
                 return false;
             }
         } catch (NumberFormatException e) {
-            editQuantidade.setError("Quantidade deve ser numérico");
+            editQuantidade.setError("Quantidade deve ser numérica");
             return false;
         }
 
@@ -132,16 +130,52 @@ public class CadastroProdutos extends AppCompatActivity {
         return true;
     }
 
+
+
     private void salvarProduto() {
+        Log.d("CadastroProduto", "Iniciando salvamento do produto");
+
         String descricao = editDescricao.getText().toString().trim();
         String codigoBarras = editCodigoBarra.getText().toString().trim();
-        double preco = Double.parseDouble(editPreco.getText().toString().trim());
+        double preco;
+        int quantidade;
+
+        try {
+            preco = Double.parseDouble(editPreco.getText().toString().trim());
+            quantidade = Integer.parseInt(editQuantidade.getText().toString().trim()); // Alterado para int
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Preço ou quantidade inválidos!", Toast.LENGTH_SHORT).show();
+            Log.e("CadastroProduto", "Erro ao converter preço ou quantidade", e);
+            return;
+        }
+
         String fornecedor = editFornecedor.getText().toString().trim();
-        String quantidade = editQuantidade.getText().toString().trim();
+        if (fornecedor.isEmpty()) {
+            Toast.makeText(this, "Razão social do fornecedor não pode ser vazia.", Toast.LENGTH_SHORT).show();
+            return; // Não continua o processo de cadastro
+        }
 
-        Produto produto = new Produto(descricao, codigoBarras, preco, fornecedor, quantidade);
-
+        Produto produto = new Produto(descricao, codigoBarras, preco, fornecedor, quantidade); // Passando quantidade como int
         boolean sucesso = dbHelper.addProduto(produto);
-        Toast.makeText(this, sucesso ? "Produto cadastrado com sucesso!" : "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();
+
+        Log.d("CadastroProduto", "Resultado do salvamento: " + sucesso);
+
+        if (sucesso) {
+            Toast.makeText(this, "Produto cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+            Log.d("CadastroProduto", "Produto cadastrado com sucesso.");
+
+            // Redireciona para a tela MenuComun
+            Intent intent = new Intent(CadastroProdutos.this, MenuComun.class);
+            startActivity(intent);
+            finish(); // Fecha a tela atual (CadastroProdutos)
+        } else {
+            Toast.makeText(this, "Erro ao cadastrar produto!", Toast.LENGTH_SHORT).show();
+            Log.e("CadastroProduto", "Erro ao salvar o produto no banco.");
+        }
+
     }
+
+
+
+
 }

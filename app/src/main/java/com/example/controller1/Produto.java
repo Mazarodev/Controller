@@ -5,14 +5,17 @@ public class Produto {
     private String codigoBarras;
     private double preco;
     private String fornecedor;
-    private String quantidade;
+    private int quantidade; // Alteração aqui: de String para int
 
-    public Produto(String descricao, String codigoBarras, double preco, String fornecedor, String quantidade) {
+    public Produto(String descricao, String codigoBarras, double preco, String fornecedor, int quantidade) {
         this.descricao = descricao;
         this.codigoBarras = codigoBarras;
         this.preco = preco;
         this.fornecedor = fornecedor;
         this.quantidade = quantidade;
+    }
+
+    public Produto(String descricao, String codigoBarras, double preco, String fornecedor, String quantidade) {
     }
 
     public String getDescricao() {
@@ -47,9 +50,11 @@ public class Produto {
         this.fornecedor = fornecedor;
     }
 
-    public String getQuantidade() {  return quantidade;  }
+    public int getQuantidade() {
+        return quantidade;
+    }
 
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.controller1;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -77,26 +78,66 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Adicione mais lógica para outros upgrades necessários
     }
-        // O exemplo acima pode ser expandido com mais verificações de versões caso você adicione mais versões no futuro.
 
-    @Override
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        super.onDowngrade(db, oldVersion, newVersion);  // Caso você precise tratar downgrade (não é recomendado)
-    }
 
     // Método para adicionar um produto
     public boolean addProduto(Produto produto) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("descricao", produto.getDescricao());
-        values.put("codigo_barras", produto.getCodigoBarras());
-        values.put("preco", produto.getPreco());
-        values.put("fornecedor", produto.getFornecedor());
-        values.put("quantidade", produto.getQuantidade());
+        // Verifica o ID do fornecedor
+        int fornecedorId = getFornecedorIdByName(produto.getFornecedor());
 
-        long result = db.insert("produtos", null, values);
-        return result != -1;
+        // Verifica se o fornecedor foi encontrado
+        if (fornecedorId == -1) {
+            Log.e("DatabaseHelper", "Fornecedor não encontrado: " + produto.getFornecedor());
+            return false; // Retorna false para evitar a inserção do produto
+        }
+
+        // Adiciona os valores do produto ao ContentValues
+        values.put("descricao", produto.getDescricao());
+        values.put("codigo_barra", produto.getCodigoBarras());
+        values.put("preco", produto.getPreco());
+        values.put("quantidade", produto.getQuantidade()); // Aqui é onde a quantidade é salva como inteiro
+        values.put("id_fornecedor", fornecedorId);
+
+        // Insere o produto na tabela
+        long result = db.insert(TABLE_PRODUTO, null, values);
+        db.close();
+
+        Log.d("DatabaseHelper", "Resultado da inserção no banco: " + result); // Log do resultado da inserção
+        return result != -1; // Retorna true se a inserção foi bem-sucedida, false caso contrário
+    }
+
+
+
+    public int getFornecedorIdByName(String nomeFornecedor) {
+        if (nomeFornecedor == null || nomeFornecedor.trim().isEmpty()) {
+            Log.e("DatabaseHelper", "Razão social nula ou vazia.");
+            return -1; // Retorna -1 se a razão social estiver vazia ou nula
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_FORNECEDOR, new String[]{"id_fornecedor"}, "razao_social = ?",
+                new String[]{nomeFornecedor}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            // Alterando o nome da coluna para id_fornecedor
+            @SuppressLint("Range") int fornecedorId = cursor.getInt(cursor.getColumnIndex("id_fornecedor"));
+            cursor.close();
+            return fornecedorId;
+        }
+
+        Log.e("DatabaseHelper", "Fornecedor não encontrado: " + nomeFornecedor);
+        return -1; // Retorna -1 se o fornecedor não for encontrado
+    }
+
+
+    public Cursor getFornecedorById(int fornecedorId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLE_FORNECEDOR, new String[]{"razao_social"},
+                "id_fornecedor = ?", new String[]{String.valueOf(fornecedorId)},
+                null, null, null);
     }
 
     // Método para adicionar um fornecedor

@@ -69,7 +69,7 @@
         android:autofillHints=""
         android:background="@drawable/text_box"
         android:padding="12dp"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         tools:ignore="HardcodedText,LabelFor" />
 
     <TextView
@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/text_box"
         android:padding="12dp"
-        android:inputType="textPassword"
+        android:inputType="text"
         tools:ignore="Autofill,HardcodedText,LabelFor" />
 
     <TextView
