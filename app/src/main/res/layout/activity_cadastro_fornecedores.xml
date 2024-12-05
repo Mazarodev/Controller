@@ -130,12 +130,5 @@
         android:textColor="@color/white"
         tools:ignore="HardcodedText,SpUsage" />
 
-    <!-- Logo -->
-    <ImageView
-        android:layout_width="390dp"
-        android:layout_height="95dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ic_logo"
-        tools:ignore="ContentDescription" />
+
 </LinearLayout>

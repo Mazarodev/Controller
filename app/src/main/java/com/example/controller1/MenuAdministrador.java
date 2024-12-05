@@ -30,12 +30,7 @@ public class MenuAdministrador extends AppCompatActivity {
         Intent intent = new Intent(MenuAdministrador.this, CadastroUsuarios.class);
         startActivity(intent);
     }
-
-    // Método para abrir a tela de Contagem
-    public void openContagem(View view) {
-        Intent intent = new Intent(MenuAdministrador.this, Contagem.class);
-        startActivity(intent);
-    }
+    
 
     // Método para abrir a tela de Relatório
     public void openRelatorio(View view) {

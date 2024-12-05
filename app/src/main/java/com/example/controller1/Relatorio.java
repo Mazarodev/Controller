@@ -46,8 +46,9 @@ public class Relatorio extends AppCompatActivity {
                 String codigoBarras = cursor.getString(cursor.getColumnIndexOrThrow("codigo_barras"));
                 double preco = cursor.getDouble(cursor.getColumnIndexOrThrow("preco"));
                 String fornecedor = cursor.getString(cursor.getColumnIndexOrThrow("fornecedor"));
+                String quantidade = cursor.getString(cursor.getColumnIndexOrThrow("quantidade"));
 
-                produtos.add(new Produto(descricao, codigoBarras, preco, fornecedor));
+                produtos.add(new Produto(descricao, codigoBarras, preco, fornecedor, quantidade));
             }
             cursor.close();
         }

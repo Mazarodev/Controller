@@ -5,12 +5,14 @@ public class Produto {
     private String codigoBarras;
     private double preco;
     private String fornecedor;
+    private String quantidade;
 
-    public Produto(String descricao, String codigoBarras, double preco, String fornecedor) {
+    public Produto(String descricao, String codigoBarras, double preco, String fornecedor, String quantidade) {
         this.descricao = descricao;
         this.codigoBarras = codigoBarras;
         this.preco = preco;
         this.fornecedor = fornecedor;
+        this.quantidade = quantidade;
     }
 
     public String getDescricao() {
@@ -43,5 +45,11 @@ public class Produto {
 
     public void setFornecedor(String fornecedor) {
         this.fornecedor = fornecedor;
+    }
+
+    public String getQuantidade() {  return quantidade;  }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
     }
 }

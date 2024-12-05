@@ -18,7 +18,7 @@ public class CadastroProdutos extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST_CODE = 1001;
 
-    private EditText editDescricao, editCodigoBarra, editPreco, editFornecedor;
+    private EditText editDescricao, editCodigoBarra, editPreco, editFornecedor, editQuantidade;
     private DatabaseHelper dbHelper;
 
     @Override
@@ -32,6 +32,8 @@ public class CadastroProdutos extends AppCompatActivity {
         editCodigoBarra = findViewById(R.id.editCodigoBarra);
         editPreco = findViewById(R.id.editPreco);
         editFornecedor = findViewById(R.id.editFornecedor);
+        editQuantidade = findViewById(R.id.editQuantidade);
+
         Button btnSalvarProduto = findViewById(R.id.btnSalvarProduto);
         Button botaoEscanear = findViewById(R.id.botao_escanear); // Novo botão de escaneamento
 
@@ -109,6 +111,23 @@ public class CadastroProdutos extends AppCompatActivity {
             return false;
         }
 
+        String quantidadeStr = editQuantidade.getText().toString().trim();
+        if (TextUtils.isEmpty(precoStr)) {
+            editQuantidade.setError("Quantidade é obrigatório");
+            return false;
+        }
+
+        try {
+            double preco = Double.parseDouble(precoStr);
+            if (preco <= 0) {
+                editQuantidade.setError("Quantidade deve ser positivo");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            editQuantidade.setError("Quantidade deve ser numérico");
+            return false;
+        }
+
         if (TextUtils.isEmpty(editFornecedor.getText().toString().trim())) {
             editFornecedor.setError("Fornecedor é obrigatório");
             return false;
@@ -122,8 +141,9 @@ public class CadastroProdutos extends AppCompatActivity {
         String codigoBarras = editCodigoBarra.getText().toString().trim();
         double preco = Double.parseDouble(editPreco.getText().toString().trim());
         String fornecedor = editFornecedor.getText().toString().trim();
+        String quantidade = editQuantidade.getText().toString().trim();
 
-        Produto produto = new Produto(descricao, codigoBarras, preco, fornecedor);
+        Produto produto = new Produto(descricao, codigoBarras, preco, fornecedor, quantidade);
 
         boolean sucesso = dbHelper.addProduto(produto);
         Toast.makeText(this, sucesso ? "Produto cadastrado com sucesso!" : "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show();

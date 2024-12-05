@@ -38,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "descricao TEXT," +
                 "codigo_barra TEXT," +
                 "preco REAL," +
+                "quantidade INTEGER," +
                 "id_fornecedor INTEGER," +
                 "FOREIGN KEY(id_fornecedor) REFERENCES " + TABLE_FORNECEDOR + "(id_fornecedor))");
 
@@ -45,7 +46,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_ESTOQUE + " (" +
                 "id_estoque INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "id_produto INTEGER," +
-                "qtd INTEGER," +
                 "data_entrada DATETIME," +
                 "FOREIGN KEY(id_produto) REFERENCES " + TABLE_PRODUTO + "(id_produto))");
 
@@ -57,15 +57,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "senha TEXT," +
                 "tipo_usuario TEXT NOT NULL CHECK(tipo_usuario IN ('comum', 'administrador')))");
 
-        // Tabela Contagem
-        db.execSQL("CREATE TABLE " + TABLE_CONTAGEM + " (" +
-                "id_contagem INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "id_produto INTEGER," +
-                "qtd_contada INTEGER," +
-                "data_contagem DATETIME," +
-                "id_usuario INTEGER," +
-                "FOREIGN KEY(id_produto) REFERENCES " + TABLE_PRODUTO + "(id_produto)," +
-                "FOREIGN KEY(id_usuario) REFERENCES " + TABLE_USUARIO + "(id_usuario))");
     }
 
     @Override
@@ -86,7 +77,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("descricao", produto.getDescricao());
         values.put("codigo_barras", produto.getCodigoBarras());
         values.put("preco", produto.getPreco());
-        values.put("fornecedor", produto.getFornecedor()); // Ajuste para o nome da coluna correspondente
+        values.put("fornecedor", produto.getFornecedor());
+        values.put("quantidade", produto.getQuantidade());
 
         long result = db.insert("produtos", null, values);
         return result != -1;

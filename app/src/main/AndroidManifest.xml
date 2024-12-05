@@ -24,9 +24,6 @@
             android:name=".Relatorio"
             android:exported="false" />
         <activity
-            android:name=".Contagem"
-            android:exported="false" />
-        <activity
             android:name=".CadastroUsuarios"
             android:exported="true" />
         <activity

@@ -29,10 +29,6 @@ public class MenuComun extends AppCompatActivity {
         navigateTo(CadastroFornecedores.class);
     }
 
-    // Método para abrir a tela de Contagem
-    public void openContagem(View view) {
-        navigateTo(Contagem.class);
-    }
 
     // Método para abrir a tela de Relatório
     public void openRelatorio(View view) {
