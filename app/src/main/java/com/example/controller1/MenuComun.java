@@ -1,8 +1,12 @@
 package com.example.controller1;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MenuComun extends AppCompatActivity {
@@ -35,14 +39,34 @@ public class MenuComun extends AppCompatActivity {
         navigateTo(Relatorio.class);
     }
 
-    // Método para realizar logout com limpeza de sessão
+    // Método para realizar logout com confirmação
     public void logout(View view) {
-        // Limpar dados de sessão
-        getSharedPreferences("user_session", MODE_PRIVATE).edit().clear().apply();
+        // Criando a caixa de diálogo de confirmação
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar Logout")
+                .setMessage("Tem certeza de que deseja sair?")
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Limpar dados de sessão
+                        getSharedPreferences("user_session", MODE_PRIVATE).edit().clear().apply();
 
-        Intent intent = new Intent(MenuComun.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
+                        // Exibe uma mensagem de sucesso (opcional)
+                        Toast.makeText(MenuComun.this, "Você foi desconectado.", Toast.LENGTH_SHORT).show();
+
+                        // Redireciona para a tela de login (MainActivity)
+                        Intent intent = new Intent(MenuComun.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();  // Finaliza a Activity atual
+                    }
+                })
+                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();  // Apenas fecha a caixa de diálogo sem fazer nada
+                    }
+                })
+                .show();  // Exibe a caixa de diálogo
     }
 }
