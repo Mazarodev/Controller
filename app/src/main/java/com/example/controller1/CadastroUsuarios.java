@@ -16,7 +16,6 @@ public class CadastroUsuarios extends AppCompatActivity {
     private EditText editNome, editEmail, editSenha, editConfirmarSenha;
     private DatabaseHelper databaseHelper;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
