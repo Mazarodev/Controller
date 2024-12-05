@@ -197,16 +197,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean verificarLogin(String email, String senha) {
         SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM Usuario WHERE email = ? AND senha = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email, senha});
 
-        Cursor cursor = db.rawQuery(
-                ("SELECT * FROM Usuario WHERE email=? AND senha=?"),
-                new String[]{email, senha});
-
-        boolean usuarioExiste = cursor.getCount() > 0; // Verifica se encontrou um registro
-        cursor.close();
-
-        return usuarioExiste; // Retorna true se o login for válido
+        if (cursor != null && cursor.moveToFirst()) {
+            cursor.close();
+            return true; // Login válido
+        } else {
+            if (cursor != null) cursor.close();
+            return false; // Login inválido
+        }
     }
+
 
     public String getTipoUsuario(String email) {
         SQLiteDatabase db = this.getReadableDatabase();

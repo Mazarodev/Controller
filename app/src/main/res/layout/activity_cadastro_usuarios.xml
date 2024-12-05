@@ -14,6 +14,7 @@
         android:layout_height="32dp"
         android:src="@drawable/ic_iconback"
         android:contentDescription="Voltar"
+        android:onClick="voltar"
         android:layout_gravity="start"
         tools:ignore="HardcodedText" />
 
@@ -42,6 +43,7 @@
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_Nome"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/text_box"
@@ -63,6 +65,7 @@
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_Email"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/text_box"
@@ -84,6 +87,7 @@
         tools:ignore="HardcodedText,SpUsage" />
     <EditText
         android:id="@+id/edit_Senha"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/text_box"
@@ -106,6 +110,7 @@
     <EditText
         android:id="@+id/edit_ConfirmarSenha"
         android:layout_width="match_parent"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:background="@drawable/text_box"
         android:padding="12dp"

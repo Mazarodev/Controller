@@ -30,6 +30,8 @@ public class CadastroUsuarios extends AppCompatActivity {
         Button btnSalvar = findViewById(R.id.btn_Salvar);
         databaseHelper = new DatabaseHelper(this);
 
+        criarUsuarioTeste();
+
         // Configurando o clique do botão de salvar
         btnSalvar.setOnClickListener(v -> salvarUsuario());
     }
@@ -37,6 +39,45 @@ public class CadastroUsuarios extends AppCompatActivity {
     public void voltar(View view) {
         onBackPressed();
     }
+
+    private void criarUsuarioTeste() {
+        boolean usuarioTesteCriado = getSharedPreferences("app_preferences", MODE_PRIVATE)
+                .getBoolean("usuario_teste_criado", false);
+        Log.d("CadastroUsuarios", "usuarioTesteCriado: " + usuarioTesteCriado);
+
+        // Se o usuário de teste já foi criado, não fazer nada
+        if (usuarioTesteCriado) {
+            Log.d("CadastroUsuarios", "Usuário de teste já criado anteriormente.");
+            return;
+        }
+
+        // Criando um usuário de teste com um e-mail único
+        String nomeTeste = "IsraelAdmin";
+        String emailTeste = "israeladmin" + System.currentTimeMillis() + "@teste.com"; // E-mail único
+        String senhaTeste = "1234567";
+        String tipoUsuarioTeste = "administrador";
+
+        // Verificando se o e-mail já está registrado
+        if (!databaseHelper.verificarEmailExiste(emailTeste)) {
+            // Adicionando o usuário de teste no banco de dados
+            boolean sucesso = databaseHelper.AddUsuario(nomeTeste, emailTeste, senhaTeste, tipoUsuarioTeste);
+            Log.d("CadastroUsuarios", "Tentativa de adicionar usuário de teste: " + sucesso);
+
+            if (sucesso) {
+                Log.d("CadastroUsuarios", "Usuário de teste criado com sucesso.");
+
+                // Marcando que o usuário de teste foi criado
+                getSharedPreferences("app_preferences", MODE_PRIVATE).edit()
+                        .putBoolean("usuario_teste_criado", true).apply();
+            } else {
+                Log.e("CadastroUsuarios", "Erro ao criar usuário de teste.");
+            }
+        } else {
+            Log.d("CadastroUsuarios", "E-mail de teste já está registrado.");
+        }
+    }
+
+
 
     private void salvarUsuario() {
         String nome = editNome.getText().toString().trim();
@@ -61,7 +102,7 @@ public class CadastroUsuarios extends AppCompatActivity {
         }
 
         // Definindo um tipo de usuário padrão (por exemplo, "comum")
-        String tipoUsuario = "comum"; // Você pode alterar isso conforme necessário
+        String tipoUsuario = "administrador"; // Você pode alterar isso conforme necessário
 
         // Chamando o método para adicionar o usuário no banco de dados
         boolean sucesso = databaseHelper.AddUsuario(nome, email, senha, tipoUsuario);
